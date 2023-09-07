@@ -21,7 +21,7 @@ export class PaisesListComponent implements OnInit {
 
     ngOnInit(): void {
         this.paisesService.read().subscribe(paises => {
-            console.log(paises)
+            //console.log(paises)
             this.paises = paises;          
         });
 

@@ -7,13 +7,13 @@ import { MenuItem } from 'primeng/api';
 
 
 @Component({
-  selector: 'app-paises',
-  templateUrl: './paises.component.html',
-  styleUrls: ['./paises.component.css'],
+  selector: 'app-estados',
+  templateUrl: './estados.component.html',
+  styleUrls: ['./estados.component.css'],
   providers: [MessageService]
 })
 
-export class PaisesComponent {
+export class EstadosComponent {
 
 	//Breadcrumb
 	items: MenuItem[] | undefined;
@@ -30,7 +30,7 @@ export class PaisesComponent {
 
 	ngOnInit(): void {
         // Componente Breadcrumb
-        this.items = [{ label: 'Pais' }];
+        this.items = [{ label: 'Estado' }];
         this.home = { icon: 'pi pi-home', routerLink: '/' };
 
         let token = localStorage.getItem('@sisGerTransPac-t')		
@@ -47,18 +47,10 @@ export class PaisesComponent {
 	}
 	
 	novoRegistro(): void {
-		this.router.navigate(['paises/create']);
+		this.router.navigate(['estados/create']);
 	}
 
     cancel(): void {
         this.router.navigate(['/'])
     }	
 }
-
-/*
-	setTimeout(() => {
-		if (!this.loginService.sessionIsValid) {
-		this.router.navigate(['/'])
-		}
-	}, 200)
-*/

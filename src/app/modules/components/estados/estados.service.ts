@@ -6,15 +6,15 @@ import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service'
 
 
-import { Pais } from './paises.model';
+import { Estado } from './estados.model';
 
 	@Injectable({
 		providedIn: 'root'
 	})
 
-	export class PaisesService {
+	export class EstadosService {
 
-  		baseUrl = `${environment.baseUrl}/paises`
+  		baseUrl = `${environment.baseUrl}/estados`
 
  		token = localStorage.getItem('@sisGerTransPac-t')
 
@@ -39,22 +39,22 @@ import { Pais } from './paises.model';
 			}			
 		}
     
-		read(): Observable<Pais[]> {   
-			return this.httpCliente.get<Pais[]>(this.baseUrl,{ headers: this.headers})
+		read(): Observable<Estado[]> {   
+			return this.httpCliente.get<Estado[]>(this.baseUrl,{ headers: this.headers})
 		}	
 
-		readById(id: string): Observable<Pais> {
+		readById(id: string): Observable<Estado> {
 			const url = `${this.baseUrl}/${id}`
-			return this.httpCliente.get<Pais>(url,{ headers: this.headers})
+			return this.httpCliente.get<Estado>(url,{ headers: this.headers})
 		}
 		
-		create(pais: Pais): Observable<Pais> {
+		create(estado: Estado): Observable<Estado> {
 			const url = `${this.baseUrl}/add`
-			return this.httpCliente.post<Pais>(url, pais, { headers: this.headers})
+			return this.httpCliente.post<Estado>(url, estado, { headers: this.headers})
 		}
 		
-		update(pais: Pais): Observable<Pais> {
-			const url = `${this.baseUrl}/update/${pais.pais_id}`
-			return this.httpCliente.put<Pais>(url, pais, { headers: this.headers})
+		update(estado: Estado): Observable<Estado> {
+			const url = `${this.baseUrl}/update/${estado.estado_id}`
+			return this.httpCliente.put<Estado>(url, estado, { headers: this.headers})
 		}		
 }

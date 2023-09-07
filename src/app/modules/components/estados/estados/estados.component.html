@@ -1,0 +1,23 @@
+<div class="grid">
+    <div class="col-12 md:col-12">
+		<div class="card" style="padding-bottom: 3px; padding-top: 25px;">
+			<div class="py-0 p-fluid p-formgrid grid">
+				<div class="field col-12 md:col-6">
+					<h5 class="my-0">Lista de Estados</h5>
+					<span>Estados Cadastrados no Sistema</span>
+					<p-breadcrumb class="max-w-full" id="breadcrumb" [model]="items" [home]="home" [style]="{border: 'none'}" ></p-breadcrumb>
+				</div>
+				<div class="field col-12 md:col-6">
+					<div class="flex flex-wrap  justify-content-end">				
+						<p-button pRipple label="Voltar" styleClass="p-button-outlined p-button-secondary" name="voltar" id="voltar" (click)="cancel()"></p-button>
+                        <p-button pRipple label="Cadastrar" class="mx-1"  name="new" id="new" (click)="novoRegistro()"></p-button>
+					</div>
+				</div>		
+			</div>
+		</div>  
+        <div class="card p-fluid">
+           <app-estados-list></app-estados-list>
+        </div>
+    </div>
+</div>
+<!--</app-paises-list> [Pode_Atualizar_Paises] = "Pode_Atualizar_Paises"-->

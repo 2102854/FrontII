@@ -2,16 +2,20 @@
     <p-table [value]="paises" [tableStyle]="{ 'min-width': '50rem' }">
         <ng-template pTemplate="header">
             <tr>
-                <th>Nome</th>
-                <th>Sigla</th>
-                <th></th>
+                <th style="width:70%">Nome</th>
+                <th style="width:20%">Sigla</th>
+                <th style="width:10%"></th>
             </tr>
         </ng-template>
         <ng-template pTemplate="body" let-pais>
             <tr>
                 <td>{{ pais.nome }}</td>
                 <td>{{ pais.sigla }}</td>
-                <td>{{ pais.pais_id }}</td>
+                <td>
+                    <a routerLink="/paises/update/{{pais.pais_id}}">
+                        <i class="bi bi-pencil-square"></i>          
+                    </a>  
+                </td>
             </tr>
         </ng-template>
     </p-table>

@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PaisesComponent } from './paises/paises.component';
-import { PaisesListComponent } from './paises-list/paises-list.component';
-import { PaisesNewComponent} from './paises_new/paises_new.component';
-import { PaisesUpdateComponent } from './paises_update/paises_update.component';
-import { PaisesRoutingModule } from './paises-routing.module';
+import { EstadosComponent } from './estados/estados.component';
+import { EstadosListComponent } from './estados-list/estados-list.component';
+//import { PaisesNewComponent} from './paises_new/paises_new.component';
+//import { PaisesUpdateComponent } from './paises_update/paises_update.component';
+import { EstadosRoutingModule } from './estados-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -27,14 +27,14 @@ import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
-    PaisesComponent,
-    PaisesListComponent,
-    PaisesNewComponent,
-    PaisesUpdateComponent
+    EstadosComponent,
+    EstadosListComponent,
+    //PaisesNewComponent,
+    //PaisesUpdateComponent
   ],
   imports: [
     CommonModule,
-    PaisesRoutingModule,
+    EstadosRoutingModule,
     TableModule,
     ButtonModule,
 		RippleModule,
@@ -56,4 +56,4 @@ import { ToastModule } from 'primeng/toast';
     ToastModule
   ]
 })
-export class PaisesModule { }
+export class EstadosModule { }
