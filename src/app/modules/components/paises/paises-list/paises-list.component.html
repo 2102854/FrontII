@@ -1,0 +1,18 @@
+<div class="card">
+    <p-table [value]="paises" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>Sigla</th>
+                <th></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-pais>
+            <tr>
+                <td>{{ pais.nome }}</td>
+                <td>{{ pais.sigla }}</td>
+                <td>{{ pais.pais_id }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
