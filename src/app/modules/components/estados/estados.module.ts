@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EstadosComponent } from './estados/estados.component';
 import { EstadosListComponent } from './estados-list/estados-list.component';
-//import { PaisesNewComponent} from './paises_new/paises_new.component';
-//import { PaisesUpdateComponent } from './paises_update/paises_update.component';
+import { EstadosNewComponent} from './estados_new/estados_new.component';
+import { EstadosUpdateComponent } from './estados_update/estados_update.component';
 import { EstadosRoutingModule } from './estados-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -29,8 +29,8 @@ import { ToastModule } from 'primeng/toast';
   declarations: [
     EstadosComponent,
     EstadosListComponent,
-    //PaisesNewComponent,
-    //PaisesUpdateComponent
+    EstadosNewComponent,
+    EstadosUpdateComponent
   ],
   imports: [
     CommonModule,

@@ -41,6 +41,7 @@ export class PaisesUpdateComponent implements OnInit {
         setTimeout(() => {
             const id = this.route.snapshot.paramMap.get('id')
             this.paisService.readById(id).subscribe(pais => {
+                console.log(pais)
                 this.pais = pais 
             })          
         }, 200) 
@@ -48,8 +49,8 @@ export class PaisesUpdateComponent implements OnInit {
     
     update(): void {
 
-        this.pais.nome = this.pais.nome.toUpperCase()
-        this.pais.sigla = this.pais.sigla.toUpperCase()
+        this.pais.nome = this.pais.nome.toUpperCase().trim()
+        this.pais.sigla = this.pais.sigla.toUpperCase().trim()
 
         this.paisService.update(this.pais).subscribe({
             next: () => {
