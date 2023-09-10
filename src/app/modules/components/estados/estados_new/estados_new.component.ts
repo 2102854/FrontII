@@ -37,7 +37,13 @@ export class EstadosNewComponent implements OnInit {
     }
         
     constructor(private loginService: LoginService, private paisesService: PaisesService,private estadosService: EstadosService, private router: Router, public messageService: MessageService,) {
-        this.loginService.validateSession()
+        setTimeout(() => {
+            this.loginService.validateSession()
+             if (!this.loginService.sessionIsValid){
+                this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
+                this.router.navigate(['/auth/login'])
+            }
+        }, 500)			 
     }
 
     
@@ -51,15 +57,8 @@ export class EstadosNewComponent implements OnInit {
         });
 
         // Componente Breadcrumb
-        this.items = [{ label: 'Estados', routerLink: '/estados' }, { label: 'Novo Registro' }];
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
-    /*
-    setTimeout(() => {
-        if (!this.loginService.sessionIsValid){
-        this.router.navigate(['/'])
-        } 
-    }, 200)
-    */
+        this.items = [{ label: 'Estados', routerLink: '/app/estados' }, { label: 'Novo Registro' }];
+        this.home = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
     }
     
     create(): void {
@@ -72,7 +71,7 @@ export class EstadosNewComponent implements OnInit {
             next: () => {
                 this.messageService.add({key: 'tst', severity: 'success', summary: 'SUCESSO', detail: 'Registro gravado com sucesso!' });
                 setTimeout(() => {
-                    this.router.navigate(['/estados'])
+                    this.router.navigate(['/app/estados'])
                 }, 2500)                                
             },
             complete: () => {},
@@ -89,7 +88,7 @@ export class EstadosNewComponent implements OnInit {
     }
     
     cancel(): void {       
-        this.router.navigate(['/estados'])
+        this.router.navigate(['/app/estados'])
     }
     
 

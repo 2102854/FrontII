@@ -30,21 +30,27 @@ export class PaisesUpdateComponent implements OnInit {
     }
         
     constructor(private loginService: LoginService, private paisService: PaisesService, private router: Router, private messageService: MessageService, private route: ActivatedRoute) {
-        this.loginService.validateSession()
+        setTimeout(() => {
+            this.loginService.validateSession()
+             if (!this.loginService.sessionIsValid){
+                this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
+                this.router.navigate(['/auth/login'])
+            }
+        }, 500)		
     }
     
     ngOnInit(): void {
         // Componente Breadcrumb
-        this.items = [{ label: 'Pais', routerLink: '/paises' }, { label: 'Atualização do Registro' }];
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
-
+        this.items = [{ label: 'Pais', routerLink: '/app/paises' }, { label: 'Atualização do Registro' }];
+        this.home = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
+        //Carrega os dados do pais
         setTimeout(() => {
             const id = this.route.snapshot.paramMap.get('id')
             this.paisService.readById(id).subscribe(pais => {
                 console.log(pais)
                 this.pais = pais 
             })          
-        }, 200) 
+        }, 200)         
     }
     
     update(): void {
@@ -56,7 +62,7 @@ export class PaisesUpdateComponent implements OnInit {
             next: () => {
                 this.messageService.add({key: 'tst', severity: 'success', summary: 'SUCESSO', detail: 'Registro alterado com sucesso!' });
                 setTimeout(() => {
-                    this.router.navigate(['/paises'])
+                    this.router.navigate(['/app/paises'])
                 }, 2500)                                
             },
             complete: () => {},
@@ -73,8 +79,6 @@ export class PaisesUpdateComponent implements OnInit {
     }
     
     cancel(): void {       
-        this.router.navigate(['/paises'])
+        this.router.navigate(['/app/paises'])
     }
-    
-
 }

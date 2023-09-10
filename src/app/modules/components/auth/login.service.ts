@@ -3,12 +3,15 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class LoginService {
+
+	public sessionIsValid: boolean = false
 
 	baseUrl = `${environment.baseUrl}/`
 
@@ -21,7 +24,7 @@ export class LoginService {
 		"Accept" : "application/json"
 	} )  
 
-  	constructor(private httpCliente: HttpClient ) { }
+  	constructor(private httpCliente: HttpClient, private router: Router ) { }
 
   	login(auth: Authorization): Observable<Authorization> {
 		let newUrl = this.baseUrl + "login"   
@@ -55,29 +58,31 @@ export class LoginService {
 		return this.httpCliente.delete<any>(newUrl, { headers: this.headers})
 	}
 
-	validateSession() : boolean {
+	validateSession(): void { 
 		let token = localStorage.getItem('@sisGerTransPac-t')
-		if (token === '' || token === null || token === undefined){
-			localStorage.clear(); 
-			return false        
-		} 	
-		
-		this.validateToken(token).subscribe({
-			next: (result) => {
-				let tokenResult = result.token
-				if (tokenResult != 'Válido') {
-					return true
-				} else {
-					return false
-				}
-			},
-			complete: () => {},
-			error: (e) => {
-				localStorage.clear(); 
-				return false     
-			}			  
-		})
 
-		return true
+		if (token === '' || token === null || token === undefined){
+			this.sessionIsValid = false 
+			localStorage.clear();  
+		} else {	
+
+			this.validateToken(token).subscribe({
+				next: (result) => {
+					let tokenResult = result.token
+					if (tokenResult === 'VALIDO') {
+						this.sessionIsValid = true				
+					} else {
+						localStorage.clear();
+						this.sessionIsValid = false  					
+					}
+				},
+				complete: () => {},
+				error: (e) => {
+					localStorage.clear();  
+					this.sessionIsValid = false    
+				}			  
+			})
+		}
+
 	}
 }

@@ -2,14 +2,15 @@ import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { NotfoundComponent } from './modules/components/notfound/notfound.component';
 import { AppLayoutComponent } from "./layout/app.layout.component";
+import { LoginComponent } from './modules/components/auth/login/login.component';
 
 @NgModule({
     imports: [
         RouterModule.forRoot([
             {
-                path: '', component: AppLayoutComponent,
+                path: 'app', component: AppLayoutComponent,
                 children: [
-                    { path: '', loadChildren: () => import('./modules/components/dashboard/dashboard.module').then(m => m.DashboardModule) },
+                    { path: 'dashboard', loadChildren: () => import('./modules/components/dashboard/dashboard.module').then(m => m.DashboardModule) },                    
                     { path: 'paises', loadChildren: () => import('./modules/components/paises/paises.module').then(m => m.PaisesModule) },
                     { path: 'estados', loadChildren: () => import('./modules/components/estados/estados.module').then(m => m.EstadosModule) },
                     { path: 'uikit', loadChildren: () => import('./modules/components/uikit/uikit.module').then(m => m.UIkitModule) },
@@ -18,7 +19,8 @@ import { AppLayoutComponent } from "./layout/app.layout.component";
                     { path: 'pages', loadChildren: () => import('./modules/components/pages/pages.module').then(m => m.PagesModule) }
                 ]
             },
-            { path: 'auth', loadChildren: () => import('./modules/components/auth/auth.module').then(m => m.AuthModule) },
+            { path: '', component: LoginComponent },
+            { path: 'auth',    loadChildren: () => import('./modules/components/auth/auth.module').then(m => m.AuthModule) },
             { path: 'landing', loadChildren: () => import('./modules/components/landing/landing.module').then(m => m.LandingModule) },
             { path: 'notfound', component: NotfoundComponent },
             { path: '**', redirectTo: '/notfound' },

@@ -37,48 +37,48 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Países',
                                 icon: 'bi bi-globe-americas',
-                                routerLink: ['/paises']
+                                routerLink: ['/app/paises']
                             },
                             {
                                 label: 'Estados',
                                 icon: 'bi bi-map',
-                                routerLink: ['/estados']
+                                routerLink: ['/app/estados']
                             }, 
                             {
                                 label: 'Cidades',
                                 icon: 'bi bi-buildings',
-                                routerLink: ['/cidades']
+                                routerLink: ['/app/cidades']
                             },                            
                             {
                                 label: 'Veículos',
                                 icon: 'pi pi-fw pi-car',
-                                routerLink: ['/veiculos']
+                                routerLink: ['/app/veiculos']
                             },
                             {
                                 label: 'Hospitais',
                                 icon: 'bi bi-hospital',
-                                routerLink: ['/hospitais']
+                                routerLink: ['/app/hospitais']
                             },
                             {
                                 label: 'Motoristas',
                                 icon: 'bi bi-person',
-                                routerLink: ['/motoristas']
+                                routerLink: ['/app/motoristas']
                             },
                             {
                                 label: 'Tipos de Doenças',
                                 icon: 'bi bi-bug',
-                                routerLink: ['/tipos_doenca']
+                                routerLink: ['/app/tipos_doenca']
                             },
                             {
                                 label: 'Tipos de Remoção',
                                 icon: 'bi bi-person-down',
-                                routerLink: ['/tipos_remocao']
+                                routerLink: ['/app/tipos_remocao']
                             }
                             ,
                             {
                                 label: 'Tipos de Encaminhamento',
                                 icon: 'bi bi-person-fill-up',
-                                routerLink: ['/tipos_encaminhamento']
+                                routerLink: ['/app/tipos_encaminhamento']
                             }                            
                         ]
                     }

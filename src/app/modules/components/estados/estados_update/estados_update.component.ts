@@ -52,7 +52,13 @@ export class EstadosUpdateComponent implements OnInit {
     }    
         
     constructor(private loginService: LoginService, private paisesService: PaisesService,private estadosService: EstadosService, private router: Router, public messageService: MessageService, private route: ActivatedRoute) {
-        this.loginService.validateSession()
+        setTimeout(() => {
+            this.loginService.validateSession()
+             if (!this.loginService.sessionIsValid){
+                this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
+                this.router.navigate(['/auth/login'])
+            }
+        }, 500)		
     }
 
     
@@ -66,8 +72,8 @@ export class EstadosUpdateComponent implements OnInit {
         });
 
         // Componente Breadcrumb
-        this.items = [{ label: 'Estados', routerLink: '/estados' }, { label: 'Atualização do Registro'}];
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
+        this.items = [{ label: 'Estados', routerLink: '/app/estados' }, { label: 'Atualização do Registro'}];
+        this.home = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
 
         setTimeout(() => {
             const id = this.route.snapshot.paramMap.get('id')            
@@ -89,7 +95,7 @@ export class EstadosUpdateComponent implements OnInit {
             next: () => {
                 this.messageService.add({key: 'tst', severity: 'success', summary: 'SUCESSO', detail: 'Registro gravado com sucesso!' });
                 setTimeout(() => {
-                    this.router.navigate(['/estados'])
+                    this.router.navigate(['/app/estados'])
                 }, 2500)                                
             },
             complete: () => {},
@@ -106,7 +112,7 @@ export class EstadosUpdateComponent implements OnInit {
     }
     
     cancel(): void {       
-        this.router.navigate(['/estados'])
+        this.router.navigate(['/app/estados'])
     }
     
 }

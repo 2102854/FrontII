@@ -30,13 +30,7 @@ import { Estado } from './estados.model';
 
   		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService) { }
 
-		ngOnInit(): void {
-			if(this.token != null){
-	            if (this.loginService.validateSession()) {
-					localStorage.clear(); 
-					this.router.navigate(['/', '/auth/login']) 
-				}    
-			}			
+		ngOnInit(): void {		
 		}
     
 		read(): Observable<Estado[]> {   

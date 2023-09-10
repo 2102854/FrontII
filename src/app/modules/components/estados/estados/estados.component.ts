@@ -20,37 +20,27 @@ export class EstadosComponent {
 	home: MenuItem | undefined;
 	
 
-  
-  	constructor(private router: Router, private messageService: MessageService, private loginService: LoginService) { }
+  	constructor(private router: Router, private messageService: MessageService, private loginService: LoginService) { 
+        setTimeout(() => {
+            this.loginService.validateSession()
+             if (!this.loginService.sessionIsValid){
+                this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
+                this.router.navigate(['/auth/login'])
+            }
+        }, 500)		         
+    }
   	
-	
-	showMessage(severity: string, summary: string, msg: string): void {
-		this.messageService.add({ severity: severity, summary: summary, detail: msg });
-	}
-
 	ngOnInit(): void {
         // Componente Breadcrumb
         this.items = [{ label: 'Estado' }];
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
-
-        let token = localStorage.getItem('@sisGerTransPac-t')		
-        if (token != null) {
-			if (!this.loginService.validateSession()) {
-                localStorage.clear(); 
-                this.router.navigate(['auth/login']) 
-                this.showMessage('error', 'Sessão encerrada', 'Encerrado por inatividade') 	
-				setTimeout(() => {
-					location.reload()
-				}, 200)							
-            }    			
-        }			
+        this.home = { icon: 'pi pi-home', routerLink: '/app/dashboard' };		
 	}
 	
 	novoRegistro(): void {
-		this.router.navigate(['estados/create']);
+		this.router.navigate(['/app/estados/create']);
 	}
 
     cancel(): void {
-        this.router.navigate(['/'])
+        this.router.navigate(['/app/dashboard'])
     }	
 }

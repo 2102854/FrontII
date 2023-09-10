@@ -22,28 +22,26 @@ import * as CryptoJS from 'crypto-js';
 })
 
 export class LoginComponent implements OnInit {
-
+    
     authorization: Authorization = new Authorization();
+    
     secretKey = "YourSecretKeyForEncryption&Descryption";
 
-    constructor(private loginService: LoginService, private router: Router, private messageService: MessageService, public layoutService: LayoutService) { }
+    constructor(private loginService: LoginService, private router: Router, private messageService: MessageService, public layoutService: LayoutService) {         console.log(this.loginService.sessionIsValid)
+        this.loginService.validateSession()
+        setTimeout(() => {
+             if (this.loginService.sessionIsValid){                
+                this.router.navigate(['/app/dashboard'])
+            }
+        }, 1000)		         
+        
+    }
 
     valCheck: string[] = ['remember'];
 
     password!: string;
 
     ngOnInit(): void {
-        let token = localStorage.getItem('@sisGerTransPac-t')
-        if (token != null) {
-            
-            if (this.loginService.validateSession()) {
-                this.router.navigate(['/']) 
-            } else {
-                this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail: 'Encerrado por inatividade' });
-                localStorage.clear(); 
-                this.router.navigate(['/auth/login'])                 
-            }          
-        }
     }
 
     login(): void{            
@@ -57,9 +55,10 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('@sisGerTransPac-n', `${cryptoNome}`)
                 localStorage.setItem('@sisGerTransPac-p', `${cryptoPermissoes}`)
                 localStorage.setItem('@sisGerTransPac-k', `${session_key}`)
+                this.loginService.sessionIsValid = true
                 setTimeout(() => {
-                    location.reload()
-                    this.router.navigate(['/'])
+                    //location.reload()
+                    this.router.navigate(['/app/dashboard'])
                 }, 1000)
 
             },
@@ -67,6 +66,7 @@ export class LoginComponent implements OnInit {
             error: (e) => {
                 //localStorage.removeItem('currentGame');
                 localStorage.clear(); 
+                this.loginService.sessionIsValid = false
                 this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail:  e.error['message err'] });   
             }
           

@@ -8,7 +8,6 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LoginService } from './../auth/login.service';
 
-
 @Component({
     templateUrl: './dashboard.component.html',
     providers: [MessageService]
@@ -26,34 +25,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
     subscription!: Subscription;
 
     constructor(private productService: ProductService, private router: Router, private messageService: MessageService, private loginService: LoginService, public layoutService: LayoutService) {
-        let token = localStorage.getItem('@sisGerTransPac-t')
-        if (token != null) {
-			if (!this.loginService.validateSession()) {
+        setTimeout(() => {
+            this.loginService.validateSession()
+             if (!this.loginService.sessionIsValid){
+                this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
                 this.router.navigate(['/auth/login'])
-                //.then(nav => {
-                //  console.log(nav); // true if navigation is successful
-                //}, err => {
-                //  console.log(err) // when there's an error
-                //});
-
-                localStorage.clear();                 
-                this.showMessage('error', 'Sessão encerrada', 'Encerrado por inatividade') 						
-            }    			
-        } else {
-            this.showMessage('error', 'Sessão encerrada', 'Encerrado por inatividade') 
-            setTimeout(() => {
-                this.router.navigate(['/auth/login']) 
-            }, 200)		
-            
-        }	
+            }
+        }, 500)		          
         
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
         });
-    }
-
-    showMessage(severity: string, summary: string, msg: string): void {
-        this.messageService.add({ severity: severity, summary: summary, detail: msg });
     }
 
     ngOnInit() {       

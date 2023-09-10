@@ -30,22 +30,19 @@ export class PaisesNewComponent implements OnInit {
     }
         
     constructor(private loginService: LoginService, private paisService: PaisesService, private router: Router, public messageService: MessageService,) {
-        this.loginService.validateSession()
+        setTimeout(() => {
+            this.loginService.validateSession()
+             if (!this.loginService.sessionIsValid){
+                this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
+                this.router.navigate(['/auth/login'])
+            }
+        }, 500)		
     }
 
-
-    
     ngOnInit(): void {
         // Componente Breadcrumb
-        this.items = [{ label: 'Pais', routerLink: '/paises' }, { label: 'Novo Registro' }];
-        this.home = { icon: 'pi pi-home', routerLink: '/' };
-    /*
-    setTimeout(() => {
-        if (!this.loginService.sessionIsValid){
-        this.router.navigate(['/'])
-        } 
-    }, 200)
-    */
+        this.items = [{ label: 'Pais', routerLink: '/app/paises' }, { label: 'Novo Registro' }];
+        this.home = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
     }
     
     create(): void {
@@ -57,7 +54,7 @@ export class PaisesNewComponent implements OnInit {
             next: () => {
                 this.messageService.add({key: 'tst', severity: 'success', summary: 'SUCESSO', detail: 'Registro gravado com sucesso!' });
                 setTimeout(() => {
-                    this.router.navigate(['/paises'])
+                    this.router.navigate(['/app/paises'])
                 }, 2500)                                
             },
             complete: () => {},
@@ -74,7 +71,7 @@ export class PaisesNewComponent implements OnInit {
     }
     
     cancel(): void {       
-        this.router.navigate(['/paises'])
+        this.router.navigate(['/app/paises'])
     }
     
 
