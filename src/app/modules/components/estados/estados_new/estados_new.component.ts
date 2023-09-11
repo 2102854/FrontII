@@ -49,16 +49,16 @@ export class EstadosNewComponent implements OnInit {
     
     ngOnInit(): void {
         this.paisesService.read().subscribe(paises => {
-            this.paises = paises;          
+            this.paises = paises   
         });
-
+           
         this.formGroup = new FormGroup({
             selectedPais: new FormControl<object | null>(null)
         });
 
         // Componente Breadcrumb
-        this.items = [{ label: 'Estados', routerLink: '/app/estados' }, { label: 'Novo Registro' }];
-        this.home = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
+        this.items = [{ label: 'Estados', routerLink: '/app/estados' }, { label: 'Novo Registro' }]
+        this.home = { icon: 'pi pi-home', routerLink: '/app/dashboard' }        
     }
     
     create(): void {
@@ -76,7 +76,6 @@ export class EstadosNewComponent implements OnInit {
             },
             complete: () => {},
             error: (e) => {
-                console.log(e.error['message err'])  
                 if (e.error['message err'] !== undefined) {
                     this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail: e.error['message err'] });
                 } else {

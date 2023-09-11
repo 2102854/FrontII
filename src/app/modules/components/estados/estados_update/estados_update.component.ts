@@ -19,8 +19,8 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 
 export class EstadosUpdateComponent implements OnInit {
-    paises: Pais[];
-    selectedPais: Pais | undefined;
+    paises: Pais[] = [];
+    selectedPais: Pais
 
     formGroup: FormGroup | undefined;
 
@@ -36,36 +36,44 @@ export class EstadosUpdateComponent implements OnInit {
         estado_id: null
     }
 
-    get_pais(id: number): Pais {
-        const pais = undefined;
-        const obj = pais || {};   
+    get_pais_id(id: number): number {
+        let num: number
         for (let i = 0; i < this.paises.length; i++) {
+            num = i
             if (Number(this.paises[i]['pais_id']) === id) {
-                
-                obj.pais_id = Number(this.paises[i]['pais_id']) 
-                obj.nome = String(this.paises[i]['nome'])
-                obj.sigla = String(this.paises[i]['sigla'])
                 break
             }
         }    
-        return obj  
+        return num  
     }    
         
     constructor(private loginService: LoginService, private paisesService: PaisesService,private estadosService: EstadosService, private router: Router, public messageService: MessageService, private route: ActivatedRoute) {
         setTimeout(() => {
+            
             this.loginService.validateSession()
              if (!this.loginService.sessionIsValid){
                 this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
                 this.router.navigate(['/auth/login'])
             }
-        }, 500)		
+        }, 500)	
+        
+        const id = this.route.snapshot.paramMap.get('id') 
+        this.estadosService.readById(id).subscribe(estado => {             
+            this.estado = estado 
+        })     
+                     
     }
 
     
     ngOnInit(): void {
+
+        setTimeout(() => {
+        
         this.paisesService.read().subscribe(paises => {
-            this.paises = paises;          
-        });
+            this.paises = paises;  
+            this.selectedPais = this.paises[this.get_pais_id(this.estado.pais_id)]
+        })          
+        }, 200) 
 
         this.formGroup = new FormGroup({
             selectedPais: new FormControl<object | null>(null)
@@ -75,14 +83,6 @@ export class EstadosUpdateComponent implements OnInit {
         this.items = [{ label: 'Estados', routerLink: '/app/estados' }, { label: 'Atualização do Registro'}];
         this.home = { icon: 'pi pi-home', routerLink: '/app/dashboard' };
 
-        setTimeout(() => {
-            const id = this.route.snapshot.paramMap.get('id')            
-            this.estadosService.readById(id).subscribe(estado => {             
-                this.estado = estado 
-                this.selectedPais = this.get_pais(estado.pais_id)
-                console.log(this.selectedPais)
-            })          
-        }, 1000) 
     }
     
     update(): void {

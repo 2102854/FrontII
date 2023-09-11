@@ -6,7 +6,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ButtonModule } from 'primeng/button';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { AppConfigComponent } from './app.config.component';
-
+import { MenuModule } from 'primeng/menu';
+//schemas
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 @NgModule({
     imports: [
         CommonModule,
@@ -14,8 +16,10 @@ import { AppConfigComponent } from './app.config.component';
         SidebarModule,
         RadioButtonModule,
         ButtonModule,
-        InputSwitchModule
+        InputSwitchModule,
+        MenuModule
     ],
+    schemas: [ CUSTOM_ELEMENTS_SCHEMA],
     declarations: [
         AppConfigComponent
     ],

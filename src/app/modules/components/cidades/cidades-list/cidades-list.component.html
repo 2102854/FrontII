@@ -1,0 +1,28 @@
+<div class="card">
+    <p-table [value]="cidades" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:30%">Nome</th>
+                <th style="width:20%">Pais</th>
+                <th style="width:20%">Estado</th>
+                <th style="width:14%">Distância</th>
+                <th style="width:14%">Valor Pedágio</th>
+                <th style="width:2%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cidade>
+            <tr>
+                <td>{{ cidade.nome }}</td>
+                <td>{{ get_pais_name(cidade.pais_id) }}</td>
+                <td>{{ get_estado_name(cidade.estado_id) }}</td>
+                <td>{{ cidade.distancia_km + ' km' }}</td>
+                <td>{{ 'R$' + cidade.valor_pedagio }}</td>
+                <td>
+                    <a routerLink="/app/cidades/update/{{cidade.cidade_id}}">
+                        <i class="bi bi-pencil-square"></i>          
+                    </a>  
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

@@ -58,8 +58,7 @@ export class PaisesNewComponent implements OnInit {
                 }, 2500)                                
             },
             complete: () => {},
-            error: (e) => {
-                console.log(e.error['message err'])  
+            error: (e) => { 
                 if (e.error['message err'] !== undefined) {
                     this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail: e.error['message err'] });
                 } else {

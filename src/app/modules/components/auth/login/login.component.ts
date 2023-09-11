@@ -27,7 +27,8 @@ export class LoginComponent implements OnInit {
     
     secretKey = "YourSecretKeyForEncryption&Descryption";
 
-    constructor(private loginService: LoginService, private router: Router, private messageService: MessageService, public layoutService: LayoutService) {         console.log(this.loginService.sessionIsValid)
+    constructor(private loginService: LoginService, private router: Router, private messageService: MessageService, public layoutService: LayoutService) {                
+        
         this.loginService.validateSession()
         setTimeout(() => {
              if (this.loginService.sessionIsValid){                
@@ -65,6 +66,7 @@ export class LoginComponent implements OnInit {
             complete: () => {},
             error: (e) => {
                 //localStorage.removeItem('currentGame');
+                location.reload()
                 localStorage.clear(); 
                 this.loginService.sessionIsValid = false
                 this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail:  e.error['message err'] });   
