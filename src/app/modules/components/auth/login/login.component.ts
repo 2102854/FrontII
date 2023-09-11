@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
              if (this.loginService.sessionIsValid){                
                 this.router.navigate(['/app/dashboard'])
             }
-        }, 1000)		         
+        }, 200)		         
         
     }
 
@@ -66,7 +66,8 @@ export class LoginComponent implements OnInit {
             complete: () => {},
             error: (e) => {
                 //localStorage.removeItem('currentGame');
-                location.reload()
+                console.log(e)
+                //location.reload()
                 localStorage.clear(); 
                 this.loginService.sessionIsValid = false
                 this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail:  e.error['message err'] });   

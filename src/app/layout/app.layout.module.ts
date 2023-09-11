@@ -17,6 +17,9 @@ import { AppFooterComponent } from './app.footer.component';
 import { AppConfigModule } from './config/config.module';
 import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
+import { ToastModule } from 'primeng/toast';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 import { MenuModule } from 'primeng/menu';
 //schemas
@@ -44,7 +47,9 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
         RippleModule,
         RouterModule,
         AppConfigModule,
-        MenuModule
+        MenuModule,
+        ToastModule,
+        ConfirmDialogModule
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA],
     exports: [AppLayoutComponent]
