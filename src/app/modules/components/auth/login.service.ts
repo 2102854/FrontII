@@ -66,6 +66,10 @@ export class LoginService {
 			next: () => {
 				this.router.navigate(['/auth/login'])
 				localStorage.clear()
+			},
+			error: () => {
+				this.router.navigate(['/auth/login'])
+				localStorage.clear()
 			}
 		})
 	}
