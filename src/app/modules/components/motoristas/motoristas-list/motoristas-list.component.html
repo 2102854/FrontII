@@ -1,0 +1,25 @@
+<div class="card">
+    <p-table [value]="motoristas" [tableStyle]="{ 'min-width': '50rem' }">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:35%">Nome</th>
+                <th style="width:20%">Número da Habilitacao</th>
+                <th style="width:15%">Carga Horaria</th>
+                <th style="width:5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-motorista>
+            <tr>
+                <td>{{ motorista.nome }}</td>
+                <td>{{ motorista.numero_habilitacao  }}</td>
+                <td>{{ motorista.carga_horaria}}</td>
+
+                <td>
+                    <a routerLink="/app/motoristas/update/{{motorista.motorista_id}}">
+                        <i class="bi bi-pencil-square"></i>          
+                    </a>  
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

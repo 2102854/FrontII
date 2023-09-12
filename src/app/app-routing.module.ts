@@ -14,10 +14,8 @@ import { LoginComponent } from './modules/components/auth/login/login.component'
                     { path: 'paises', loadChildren: () => import('./modules/components/paises/paises.module').then(m => m.PaisesModule) },
                     { path: 'estados', loadChildren: () => import('./modules/components/estados/estados.module').then(m => m.EstadosModule) },
                     { path: 'cidades', loadChildren: () => import('./modules/components/cidades/cidades.module').then(m => m.CidadesModule) },
-                    { path: 'uikit', loadChildren: () => import('./modules/components/uikit/uikit.module').then(m => m.UIkitModule) },
-                    { path: 'documentation', loadChildren: () => import('./modules/components/documentation/documentation.module').then(m => m.DocumentationModule) },
-                    { path: 'blocks', loadChildren: () => import('./modules/components/primeblocks/primeblocks.module').then(m => m.PrimeBlocksModule) },
-                    { path: 'pages', loadChildren: () => import('./modules/components/pages/pages.module').then(m => m.PagesModule) }
+                    { path: 'veiculos', loadChildren: () => import('./modules/components/veiculos/veiculos.module').then(m => m.VeiculosModule) },
+                    { path: 'motoristas', loadChildren: () => import('./modules/components/motoristas/motoristas.module').then(m => m.VeiculosModule) }
                 ]
             },
             { path: '', component: LoginComponent },
