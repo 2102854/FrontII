@@ -7,12 +7,21 @@ import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LoginService } from './../auth/login.service';
+import { Dashboard } from './dashboard.model';
+import { DashboardService } from './dashboard.services';
 
 @Component({
     templateUrl: './dashboard.component.html',
     providers: [MessageService]
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+
+    dashboard : Dashboard;
+    total_pacientes: number = 0;
+    total_hospitais: number = 0;
+    total_agendamentos: number = 0;
+    total_veiculos: number = 0;
+    pacientes_cadastrados_mes_corrente: number = 0;
 
     items!: MenuItem[];
 
@@ -24,14 +33,34 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     subscription!: Subscription;
 
-    constructor(private productService: ProductService, private router: Router, private messageService: MessageService, private loginService: LoginService, public layoutService: LayoutService) {
+    constructor(
+        private productService: ProductService, 
+        private router: Router, 
+        private messageService: MessageService, 
+        private loginService: LoginService, 
+        private dashboardService: DashboardService,
+        public layoutService: LayoutService
+
+    ){
         setTimeout(() => {
             this.loginService.validateSession()
              if (!this.loginService.sessionIsValid){
                 this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
                 this.router.navigate(['/auth/login'])
             }
-        }, 500)		          
+        }, 200)	
+        
+        setTimeout(() => {
+            this.dashboardService.getDashboard().subscribe(dashboard => {
+                //this.dashboard = dashboard;   
+                this.total_pacientes = dashboard.total_pacientes;  
+                this.total_hospitais = dashboard.total_hospitais;
+                this.total_agendamentos = dashboard.total_agendamentos;
+                this.total_veiculos = dashboard.total_veiculos;
+                this.pacientes_cadastrados_mes_corrente = dashboard.pacientes_cadastrados_mes_corrente;
+
+            });
+        }, 200)	
         
         this.subscription = this.layoutService.configUpdate$.subscribe(() => {
             this.initChart();
