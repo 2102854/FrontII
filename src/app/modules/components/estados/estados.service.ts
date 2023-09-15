@@ -6,7 +6,7 @@ import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service'
 
 
-import { Estado } from './estados.model';
+import { Estado, EstadoFull } from './estados.model';
 
 	@Injectable({
 		providedIn: 'root'
@@ -20,7 +20,7 @@ import { Estado } from './estados.model';
 		ngOnInit(): void {		
 		}
     
-		read(): Observable<Estado[]> {   			
+		read(): Observable<EstadoFull[]> {   			
 			let token = localStorage.getItem('@sisGerTransPac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
@@ -31,7 +31,7 @@ import { Estado } from './estados.model';
 				"Content-Type" : "application/json",
 				"Accept" : "application/json"
 			})	
-			return this.httpCliente.get<Estado[]>(this.baseUrl,{ headers: headers})
+			return this.httpCliente.get<EstadoFull[]>(this.baseUrl,{ headers: headers})
 		}	
 
 		readById(id: string): Observable<Estado> {

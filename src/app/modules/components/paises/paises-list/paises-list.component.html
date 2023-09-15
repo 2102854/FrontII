@@ -1,8 +1,8 @@
 <div class="card">
-    <p-table [value]="paises" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="paises" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="8" [rowsPerPageOptions]="[5, 10, 15, 20]" responsiveLayout="scroll">
         <ng-template pTemplate="header">
-            <tr>
-                <th style="width:70%">Nome</th>
+            <tr>                
+                <th pSortableColumn="nome" style="width:70%">Nome<p-sortIcon field="code"></p-sortIcon></th>
                 <th style="width:20%">Sigla</th>
                 <th style="width:10%"></th>
             </tr>

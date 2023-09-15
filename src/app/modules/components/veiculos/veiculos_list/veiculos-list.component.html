@@ -1,5 +1,5 @@
 <div class="card">
-    <p-table [value]="veiculos" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="veiculos" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="8" responsiveLayout="scroll">
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:35%">Modelo</th>

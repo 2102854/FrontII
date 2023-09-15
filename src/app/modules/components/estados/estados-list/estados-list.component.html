@@ -1,9 +1,9 @@
 <div class="card">
-    <p-table [value]="estados" [tableStyle]="{ 'min-width': '50rem' }">
+    <p-table [value]="estados" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="8" [rowsPerPageOptions]="[5, 10, 15, 20]" >
         <ng-template pTemplate="header">
             <tr>
-                <th style="width:40%">Nome</th>
-                <th style="width:40%">Pais</th>
+                <th pSortableColumn="nome" style="width:40%">Nome<p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="pais_nome" style="width:40%">Nome<p-sortIcon field="code"></p-sortIcon></th>
                 <th style="width:15%">Sigla</th>
                 <th style="width:5%"></th>
             </tr>
@@ -11,7 +11,7 @@
         <ng-template pTemplate="body" let-estado>
             <tr>
                 <td>{{ estado.nome }}</td>
-                <td>{{ get_pais_name(estado.pais_id) }}</td>
+                <td>{{ estado.pais_nome }}</td>
                 <td>{{ estado.sigla }}</td>
                 <td>
                     <a routerLink="/app/estados/update/{{estado.estado_id}}">
