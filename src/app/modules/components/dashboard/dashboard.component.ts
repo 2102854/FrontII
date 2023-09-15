@@ -1,7 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MenuItem } from 'primeng/api';
-import { Product } from '../../api/product';
-import { ProductService } from '../../service/product.service';
 import { Subscription } from 'rxjs';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { Router } from '@angular/router';
@@ -26,14 +23,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     agendamentos_ano:[] = []; 
     cadastros_ano:[] = []; 
 
-    items!: MenuItem[];
-    products!: Product[];
     chartData: any;
     chartOptions: any;
     subscription!: Subscription;
 
     constructor(
-        private productService: ProductService, 
         private router: Router, 
         private messageService: MessageService, 
         private loginService: LoginService, 
@@ -62,8 +56,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
                     this.agendamentos_ano.push(val)
                 }
                 this.initChart();
-                console.log(this.agendamentos_ano)
-
             });
         }, 200)	
         
@@ -72,15 +64,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
     }
 
-    ngOnInit() {       
-        
-        this.productService.getProductsSmall().then(data => this.products = data);
-
-        this.items = [
-            { label: 'Add New', icon: 'pi pi-fw pi-plus' },
-            { label: 'Remove', icon: 'pi pi-fw pi-minus' }
-        ];        
-    }
+    ngOnInit() {}
 
     initChart() {
         const documentStyle = getComputedStyle(document.documentElement);

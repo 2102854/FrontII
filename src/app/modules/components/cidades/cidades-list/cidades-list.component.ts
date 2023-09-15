@@ -1,11 +1,8 @@
-import { Component, Input , AfterViewInit, ViewChild,OnInit } from '@angular/core';
-import { Cidade } from './../cidades.model';
+import { Component, OnInit } from '@angular/core';
+import { CidadeFull } from './../cidades.model';
 import { CidadesService } from "./../cidades.service";
-import { Pais } from '../../paises/paises.model';
-import { PaisesService } from '../../paises/paises.service';
-import { Estado } from '../../estados/estados.model';
-import { EstadosService } from '../../estados/estados.service';
 import { MessageService } from 'primeng/api';
+import { SortEvent } from 'primeng/api';
 
 @Component({
     selector: 'app-cidades-list',
@@ -16,59 +13,37 @@ import { MessageService } from 'primeng/api';
 
 export class CidadesListComponent implements OnInit {
 
-    paises: Pais[];
-    estados: Estado[];
-    cidades: Cidade[];
+    cidadesFull: CidadeFull[];  
 
-    get_pais_name(id: number): string {
-        let nomePais: string = null;        
-        for (let i = 0; i < this.paises.length; i++) {            
-            const key = Number(this.paises[i]['pais_id']);
-            nomePais = this.paises[i]['nome'];            
-            if (key === id) break
-         }
-        return nomePais
-    }
-
-    get_estado_name(id: number): string {
-        let nomeEstado: string = null;        
-        for (let i = 0; i < this.estados.length; i++) {            
-            const key = Number(this.estados[i]['estado_id']);
-            nomeEstado = this.estados[i]['nome'];            
-            if (key === id) break
-         }
-        return nomeEstado
-    }    
-
-    constructor(private paisesService: PaisesService, private estadosService: EstadosService, private cidadesService: CidadesService, private messageService: MessageService ) { 
+    constructor(private cidadesService: CidadesService, private messageService: MessageService ) { 
         
-        this.paisesService.read().subscribe(paises => {
-            this.paises = paises;          
-        });
-
-        this.estadosService.read().subscribe(estados => {
-            this.estados = estados;          
-        });
-
-
         setTimeout(() => {
             this.cidadesService.read().subscribe({
-                next: (cidades) => {
-                    console.log(cidades)
-                    this.cidades = cidades;
+                next: (cidadesFull) => {
+                    this.cidadesFull = cidadesFull;
                 },
                 error: (e) => {
-                    console.log('aqui deu erro')
-                    console.log(e.error['message'])
                     this.messageService.add({ severity: 'error', summary: 'Erro ', detail: 'erro' });
-                }
-                        
+                }                        
             });  
-        },300)
-      
+        },200)      
     }
 
-    ngOnInit(): void {
-        
-    }  
+    ngOnInit(): void {} 
+    
+    customSort(event: SortEvent) {
+        event.data.sort((data1, data2) => {
+            let value1 = data1[event.field];
+            let value2 = data2[event.field];
+            let result = null;
+
+            if (value1 == null && value2 != null) result = -1;
+            else if (value1 != null && value2 == null) result = 1;
+            else if (value1 == null && value2 == null) result = 0;
+            else if (typeof value1 === 'string' && typeof value2 === 'string') result = value1.localeCompare(value2);
+            else result = value1 < value2 ? -1 : value1 > value2 ? 1 : 0;
+
+            return event.order * result;
+        });
+    }     
 }

@@ -1,10 +1,10 @@
 <div class="card">
-    <p-table [value]="cidades" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="8" responsiveLayout="scroll">
+    <p-table [value]="cidadesFull" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="8" responsiveLayout="scroll" [rowsPerPageOptions]="[5, 10, 15, 20]">
         <ng-template pTemplate="header">
             <tr>
-                <th style="width:30%">Nome</th>
-                <th style="width:20%">Pais</th>
-                <th style="width:20%">Estado</th>
+                <th pSortableColumn="nome" style="width:30%">Nome<p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="pais_nome" style="width:20%">Nome<p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="estado_nome" style="width:20%">Nome<p-sortIcon field="code"></p-sortIcon></th>
                 <th style="width:14%">Distância</th>
                 <th style="width:14%">Valor Pedágio</th>
                 <th style="width:2%"></th>
@@ -13,8 +13,8 @@
         <ng-template pTemplate="body" let-cidade>
             <tr>
                 <td>{{ cidade.nome }}</td>
-                <td>{{ get_pais_name(cidade.pais_id) }}</td>
-                <td>{{ get_estado_name(cidade.estado_id) }}</td>
+                <td>{{ cidade.pais_nome }}</td>
+                <td>{{ cidade.estado_nome }}</td>
                 <td>{{ cidade.distancia_km + ' km' }}</td>
                 <td>{{ 'R$' + cidade.valor_pedagio }}</td>
                 <td>

@@ -1,7 +1,6 @@
-import { Component, Input , AfterViewInit, ViewChild,OnInit } from '@angular/core';
-import { Estado, EstadoFull } from './../estados.model';
+import { Component, OnInit } from '@angular/core';
+import { EstadoFull } from './../estados.model';
 import { EstadosService } from "./../estados.service";
-import { Pais } from '../../paises/paises.model';
 import { PaisesService } from '../../paises/paises.service';
 import { SortEvent } from 'primeng/api';
 
@@ -13,36 +12,15 @@ import { SortEvent } from 'primeng/api';
 
 export class EstadosListComponent implements OnInit {
 
-    //paises: Pais[];
     estados: EstadoFull[];
 
-    /*
-    get_pais_name(id: number): string {
-        let nomePais: string = null;        
-        for (let i = 0; i < this.paises.length; i++) {
-            
-            const key = Number(this.paises[i]['pais_id']);
-            nomePais = this.paises[i]['nome'];
-            
-            if (key === id) break
-         }
-        return nomePais
-    }
-    */
     constructor(private paisesService: PaisesService, private estadosService: EstadosService ) { 
-        /*
-        this.paisesService.read().subscribe(paises => {
-            this.paises = paises;          
-        });
-        */
-
         this.estadosService.read().subscribe(estadoFull => {
             this.estados = estadoFull;          
         });
     }
 
-    ngOnInit(): void {        
-    }  
+    ngOnInit(): void {}
 
     customSort(event: SortEvent) {
         event.data.sort((data1, data2) => {
@@ -59,5 +37,4 @@ export class EstadosListComponent implements OnInit {
             return event.order * result;
         });
     }    
-
 }

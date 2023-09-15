@@ -3,9 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { LoginService } from './../auth/login.service'
-
-
+import { LoginService } from './../auth/login.service';
 import { Estado, EstadoFull } from './estados.model';
 
 	@Injectable({
@@ -17,8 +15,7 @@ import { Estado, EstadoFull } from './estados.model';
   		baseUrl = `${environment.baseUrl}/estados`
   		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService) { }
 
-		ngOnInit(): void {		
-		}
+		ngOnInit(): void {}
     
 		read(): Observable<EstadoFull[]> {   			
 			let token = localStorage.getItem('@sisGerTransPac-t')

@@ -4,9 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service';
-
-
-import { Cidade } from './cidades.model';
+import { Cidade, CidadeFull } from './cidades.model';
 
 	@Injectable({
 		providedIn: 'root'
@@ -17,10 +15,9 @@ import { Cidade } from './cidades.model';
   		baseUrl = `${environment.baseUrl}/cidades`
   		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService) { }
 
-		ngOnInit(): void {		
-		}
+		ngOnInit(): void {}
     
-		read(): Observable<Cidade[]> {   
+		read(): Observable<CidadeFull[]> {   
 			let token = localStorage.getItem('@sisGerTransPac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
@@ -31,7 +28,7 @@ import { Cidade } from './cidades.model';
 				"Content-Type" : "application/json",
 				"Accept" : "application/json"
 			})				
-			return this.httpCliente.get<Cidade[]>(this.baseUrl,{ headers: headers})
+			return this.httpCliente.get<CidadeFull[]>(this.baseUrl,{ headers: headers})
 		}	
 
 		readById(id: string): Observable<Cidade> {
