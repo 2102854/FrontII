@@ -10,6 +10,7 @@ import { LoginComponent } from './modules/components/auth/login/login.component'
             {
                 path: 'app', component: AppLayoutComponent,
                 children: [
+                    { path: 'pacientes', loadChildren: () => import('./modules/components/patients/patients.module').then(m => m.PatientsModule) },
                     { path: 'dashboard', loadChildren: () => import('./modules/components/dashboard/dashboard.module').then(m => m.DashboardModule) },                    
                     { path: 'paises', loadChildren: () => import('./modules/components/paises/paises.module').then(m => m.PaisesModule) },
                     { path: 'estados', loadChildren: () => import('./modules/components/estados/estados.module').then(m => m.EstadosModule) },
