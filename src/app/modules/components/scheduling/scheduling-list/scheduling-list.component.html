@@ -1,0 +1,82 @@
+<div class="card">
+    <p-table dataKey="agendamento_id" [value]="schedulingFull" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="8" responsiveLayout="scroll" [rowsPerPageOptions]="[5, 10, 15, 20]">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:5%"></th>
+                <th pSortableColumn="nome" style="width:30%">Nome<p-sortIcon field="code"></p-sortIcon></th>
+                <th style="width:7%">Data Nasc.</th>
+                <th style="width:7%">Telefone</th>
+                <th style="width:7%">Hygia</th>
+                <th style="width:30%">Hospital</th>
+                <th style="width:10%">Data Remoção</th>
+                <th style="width: 4%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-scheduling let-expanded="expanded">
+            <tr>
+                <td>
+                    <button type="button" pButton pRipple [pRowToggler]="scheduling" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                </td>                
+                <td>{{ scheduling.nome }}</td>                
+                <td>{{ scheduling.data_nascimento | date :'dd/MM/yyyy'}}</td>
+                <td>{{ scheduling.tel_1 }}</td>
+                <td>{{ scheduling.hygia }}</td>
+                <td>{{ scheduling.hospital }}</td>
+                <td>{{ scheduling.data_remocao | date :'dd/MM/yyyy'}}</td>                
+                <td>
+                    <a routerLink="/app/agendamento/update/{{scheduling.agendamento_id}}">
+                        <i class="bi bi-pencil-square"></i>          
+                    </a>  
+                </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="rowexpansion" let-scheduling>
+            <tr>
+                <td colspan="6">
+                    <div class="card text-bg-secondary mb-3" style="padding-bottom: 3px; padding-top: 3px;">
+                        <div class="row g-0">
+                          <div class="col-md-8">
+                            <div class="card-body">
+                                <ul class="flex flex-wrap m-0 p-0 text-lg">
+                                    <li class="flex align-items-center w-6 p-3">
+                                        <i class="bi bi-calendar text-green-600 mr-2 align-self-start"></i>
+                                        <div class="text-700 text-1xl font-bold mb-3 align-items-center">Detalhes do Agendamento</div>
+                                    </li>
+                                </ul>   
+                                                        
+                                <p>
+                                    <span class="text-700 text-1xl font-bold mb-3">Tipo de doenca:</span>
+                                    <span style="padding-left: 5px;">{{ scheduling.tipo_doenca }}</span>
+                                </p>
+                                   
+                                <p>
+                                    <span class="text-700 text-1xl font-bold mb-3">Tipo de encaminhamento:</span>
+                                    <span style="padding-left: 5px;">{{ scheduling.tipo_encaminhamento }}</span>
+                                </p> 
+                                <!--                               
+                                <p>
+                                    <span class="text-700 text-1xl font-bold mb-3">Número:</span>
+                                    <span style="padding-left: 5px;">{{ scheduling.numero }}</span>
+                                </p>
+                                <p>
+                                    <span class="text-700 text-1xl font-bold mb-3">Complemento:</span>
+                                    <span style="padding-left: 5px;">{{ scheduling.complemento }}</span>
+                                </p>     
+                                <p>
+                                    <span class="text-700 text-1xl font-bold mb-3">CEP:</span>
+                                    <span style="padding-left: 5px;">{{ scheduling.cep }}</span>
+                                </p>
+                                <p>
+                                    <span class="text-700 text-1xl font-bold mb-3">Data de Cadastro:</span>
+                                    <span style="padding-left: 5px; padding-bottom: 3px;">{{ scheduling.data_cadastro | date :'dd/MM/yyyy' }}</span>
+                                </p> 
+                            -->  
+                            </div>
+                          </div> 
+                        </div>
+                      </div>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
