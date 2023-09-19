@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service'
 import { Scheduling, SchedulingFull } from './scheduling.model';
+import { CookieService } from 'ngx-cookie-service';
 
 	@Injectable({
 		providedIn: 'root'
@@ -14,12 +15,12 @@ import { Scheduling, SchedulingFull } from './scheduling.model';
 
   		baseUrl = `${environment.baseUrl}/agendamentos`
 
-  		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService) { }
+  		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService, public cookieService: CookieService) { }
 
 		ngOnInit(): void {}
     
 		read(): Observable<SchedulingFull[]> {  
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -33,7 +34,7 @@ import { Scheduling, SchedulingFull } from './scheduling.model';
 		}	
 
 		readById(id: string): Observable<Scheduling> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -48,7 +49,7 @@ import { Scheduling, SchedulingFull } from './scheduling.model';
 		}
 		
 		create(scheduling: Scheduling): Observable<Scheduling> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -63,7 +64,7 @@ import { Scheduling, SchedulingFull } from './scheduling.model';
 		}
 		
 		update(scheduling: Scheduling): Observable<Scheduling> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",

@@ -26,7 +26,7 @@
                         -->
                         <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Esqueceu sua senha?</a>
                     </div>
-                    <button pButton pRipple label="Login" class="w-full p-3 text-xl" basic (click)="login()"></button>
+                    <button pButton pRipple label="Login" [disabled]="loginIsDisable" class="w-full p-3 text-xl" basic (click)="login()"></button>
                 </div>
             </div>
         </div>

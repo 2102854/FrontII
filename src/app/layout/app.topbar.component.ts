@@ -4,16 +4,20 @@ import { LayoutService } from "./service/app.layout.service";
 import { Router } from '@angular/router';
 import { LoginService} from './../modules/components/auth/login.service';
 import * as CryptoJS from 'crypto-js';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
     selector: 'app-topbar',
     templateUrl: './app.topbar.component.html',
-    providers: [MessageService, ConfirmationService]
+    providers: [MessageService, ConfirmationService, CookieService]
 })
 export class AppTopBarComponent implements OnInit {
 
-    key = String(localStorage.getItem('@sisGerTransPac-k'));
-    crypto = String(localStorage.getItem('@sisGerTransPac-n'));
+    key = String(this.cookieService.get('_sisgertranspac-c'));
+    crypto = String(this.cookieService.get('_sisgertranspac-n'));
+
+    
+
     usuario = CryptoJS.AES.decrypt(this.crypto, this.key).toString(CryptoJS.enc.Utf8) 
 
     items!: MenuItem[];
@@ -26,7 +30,7 @@ export class AppTopBarComponent implements OnInit {
 
     constructor(
         private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, 
-        private loginService: LoginService , public layoutService: LayoutService) { }
+        private loginService: LoginService , public layoutService: LayoutService, public cookieService: CookieService) { }
 
     update() {
         //this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' })
@@ -42,7 +46,6 @@ export class AppTopBarComponent implements OnInit {
             rejectLabel: 'Não',
             accept: () => {
                 this.loginService.executeLogout()                
-                //this.router.navigate(['/auth/login']) 
             },
             reject: () => {
                 this.messageService.add({ severity: 'info', summary: 'Atenção', detail: 'Operação cancelada pelo usuário.' })

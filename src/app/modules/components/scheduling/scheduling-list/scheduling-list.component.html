@@ -15,7 +15,9 @@
         <ng-template pTemplate="body" let-scheduling let-expanded="expanded">
             <tr>
                 <td>
-                    <button type="button" pButton pRipple [pRowToggler]="scheduling" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    <button type="button" pButton pRipple [pRowToggler]="scheduling" 
+                    class="p-element p-button-text text-sm p-button-rounded p-button-plain p-0 w-2rem h-2rem inline-flex align-items-center justify-content-center p-button p-component p-button-icon-only ng-star-inserted" 
+                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>                
                 <td>{{ scheduling.nome }}</td>                
                 <td>{{ scheduling.data_nascimento | date :'dd/MM/yyyy'}}</td>

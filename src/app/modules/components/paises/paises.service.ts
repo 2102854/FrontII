@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service'
-
-
+import { CookieService } from 'ngx-cookie-service';
 import { Pais } from './paises.model';
 
 	@Injectable({
@@ -16,13 +15,13 @@ import { Pais } from './paises.model';
 
   		baseUrl = `${environment.baseUrl}/paises`
 
-  		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService) { }
+  		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService, public cookieService: CookieService) { }
 
 		ngOnInit(): void {	
 		}
     
 		read(): Observable<Pais[]> {  
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -36,7 +35,7 @@ import { Pais } from './paises.model';
 		}	
 
 		readById(id: string): Observable<Pais> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -51,7 +50,7 @@ import { Pais } from './paises.model';
 		}
 		
 		create(pais: Pais): Observable<Pais> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -66,7 +65,7 @@ import { Pais } from './paises.model';
 		}
 		
 		update(pais: Pais): Observable<Pais> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",

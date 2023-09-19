@@ -5,9 +5,8 @@ import { MessageService } from 'primeng/api';
 import { LoginService } from './../../auth/login.service';
 import { MenuItem } from 'primeng/api';
 
-
 @Component({
-  selector: 'app-veiculos',
+  selector: 'app-motoristas',
   templateUrl: './motoristas.component.html',
   styleUrls: ['./motoristas.component.css'],
   providers: [MessageService]
@@ -25,7 +24,6 @@ export class MotoristasComponent {
             this.loginService.validateSession()
              if (!this.loginService.sessionIsValid){
                 this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
-                this.router.navigate(['/auth/login'])
             }
         }, 500)		         
     }

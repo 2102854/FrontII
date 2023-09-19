@@ -4,14 +4,17 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
 })
 
+
 export class LoginService {
 
-	public sessionIsValid: boolean = false
+	public sessionIsValid: boolean = false;
 
 	baseUrl = `${environment.baseUrl}/`
 
@@ -24,7 +27,7 @@ export class LoginService {
 		"Accept" : "application/json"
 	} )  
 
-  	constructor(private httpCliente: HttpClient, private router: Router ) { }
+  	constructor(private httpCliente: HttpClient, private router: Router, public cookieService: CookieService) { }
 
   	login(auth: Authorization): Observable<Authorization> {
 		this.headers = new HttpHeaders({  
@@ -60,26 +63,35 @@ export class LoginService {
 	}
 
 	executeLogout():void {
-		let token = localStorage.getItem('@sisGerTransPac-t')
+		let token = this.cookieService.get('_sisgertranspac-t')
 		console.log('executeLogout: ' + token)
 		this.logout(token).subscribe({
-			next: () => {
-				this.router.navigate(['/auth/login'])
-				localStorage.clear()
+			next: () => {		
 			},
-			error: () => {
-				this.router.navigate(['/auth/login'])
-				localStorage.clear()
+			error: () => {	
+			},
+			complete: () => {
+				//Exclui apenas os cookies de sessão 
+				this.cookieService.delete('_sisgertranspac-t');
+				this.cookieService.delete('_sisgertranspac-n');
+				this.cookieService.delete('_sisgertranspac-p');
+				this.cookieService.delete('_sisgertranspac-c');					
+				this.router.navigate(['/auth/login']);
 			}
 		})
 	}
 
 	validateSession(): void { 
-		let token = localStorage.getItem('@sisGerTransPac-t')
-
+		let token = this.cookieService.get('_sisgertranspac-t')
 		if (token === '' || token === null || token === undefined){
 			this.sessionIsValid = false 
-			localStorage.clear();  
+			//Exclui apenas os cookies de sessão 
+			this.cookieService.delete('_sisgertranspac-t');
+			this.cookieService.delete('_sisgertranspac-n');
+			this.cookieService.delete('_sisgertranspac-p');
+			this.cookieService.delete('_sisgertranspac-c');
+			this.router.navigate(['/auth/login']);
+
 		} else {	
 
 			this.validateToken(token).subscribe({
@@ -88,14 +100,14 @@ export class LoginService {
 					if (tokenResult === 'VALIDO') {
 						this.sessionIsValid = true				
 					} else {
-						localStorage.clear();
-						this.sessionIsValid = false  					
+						this.executeLogout();	
 					}
+					console.log(result)
 				},
 				complete: () => {},
 				error: (e) => {
-					localStorage.clear();  
-					this.sessionIsValid = false    
+					this.sessionIsValid = false  
+					this.executeLogout();					  
 				}			  
 			})
 		}

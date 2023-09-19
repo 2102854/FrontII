@@ -4,8 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service';
-
-
+import { CookieService } from 'ngx-cookie-service';
 import { Motorista } from './motoristas.model';
 
 	@Injectable({
@@ -15,13 +14,13 @@ import { Motorista } from './motoristas.model';
 	export class MotoristasService {
 
   		baseUrl = `${environment.baseUrl}/motoristas`
-  		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService) { }
+  		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService, public cookieService: CookieService) { }
 
 		ngOnInit(): void {		
 		}
     
 		read(): Observable<Motorista[]> {   
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -35,7 +34,7 @@ import { Motorista } from './motoristas.model';
 		}	
 
 		readById(id: string): Observable<Motorista> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -50,7 +49,7 @@ import { Motorista } from './motoristas.model';
 		}
 		
 		create(motorista: Motorista): Observable<Motorista> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -65,7 +64,7 @@ import { Motorista } from './motoristas.model';
 		}
 		
 		update(motorista: Motorista): Observable<Motorista> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",

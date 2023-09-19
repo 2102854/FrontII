@@ -24,7 +24,6 @@ export class PaisesComponent {
             this.loginService.validateSession()
              if (!this.loginService.sessionIsValid){
                 this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
-                this.router.navigate(['/auth/login'])
             }
         }, 500)		 		
 	}
@@ -44,11 +43,3 @@ export class PaisesComponent {
         this.router.navigate(['/app/dashboard'])
     }	
 }
-
-/*
-	setTimeout(() => {
-		if (!this.loginService.sessionIsValid) {
-		this.router.navigate(['/'])
-		}
-	}, 200)
-*/

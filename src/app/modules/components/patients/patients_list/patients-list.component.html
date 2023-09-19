@@ -1,5 +1,5 @@
 <div class="card">
-    <p-table dataKey="paciente_id" [value]="patientsFull" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="8" responsiveLayout="scroll" [rowsPerPageOptions]="[5, 10, 15, 20]">
+    <p-table dataKey="paciente_id" [value]="patientsFull" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5" responsiveLayout="scroll" [rowsPerPageOptions]="[5, 10, 15, 20]">
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:5%"></th>
@@ -13,7 +13,9 @@
         <ng-template pTemplate="body" let-paciente let-expanded="expanded">
             <tr>
                 <td>
-                    <button type="button" pButton pRipple [pRowToggler]="paciente" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+                    <button type="button" pButton pRipple [pRowToggler]="paciente" 
+                    class="p-element p-button-text text-sm p-button-rounded p-button-plain p-0 w-2rem h-2rem inline-flex align-items-center justify-content-center p-button p-component p-button-icon-only ng-star-inserted" 
+                    [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
                 </td>                
                 <td>{{ paciente.nome }}</td>                
                 <td>{{ paciente.data_nasc | date :'dd/MM/yyyy'}}</td>

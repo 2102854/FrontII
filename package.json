@@ -29,6 +29,8 @@
         "bootstrap-icons": "^1.10.5",
         "chart.js": "^3.3.2",
         "crypto-js": "^4.1.1",
+        "ipdata": "^2.2.4",
+        "ngx-cookie-service": "^16.0.1",
         "primeflex": "^3.3.1",
         "primeicons": "6.0.1",
         "primeng": "16.0.2",

@@ -53,17 +53,14 @@ export class EstadosUpdateComponent implements OnInit {
             this.loginService.validateSession()
              if (!this.loginService.sessionIsValid){
                 this.messageService.add({ severity: 'error', summary: 'Sessão encerrada', detail: 'Deslogado por inatividade' });
-                this.router.navigate(['/auth/login'])
             }
         }, 500)	
         
         const id = this.route.snapshot.paramMap.get('id') 
         this.estadosService.readById(id).subscribe(estado => {             
             this.estado = estado 
-        })     
-                     
+        })                 
     }
-
     
     ngOnInit(): void {
 

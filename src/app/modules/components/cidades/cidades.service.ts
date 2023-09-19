@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service';
 import { Cidade, CidadeFull } from './cidades.model';
+import { CookieService } from 'ngx-cookie-service';
 
 	@Injectable({
 		providedIn: 'root'
@@ -13,12 +14,12 @@ import { Cidade, CidadeFull } from './cidades.model';
 	export class CidadesService {
 
   		baseUrl = `${environment.baseUrl}/cidades`
-  		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService) { }
+  		constructor(private httpCliente: HttpClient, private router: Router, private loginService: LoginService, public cookieService: CookieService) { }
 
 		ngOnInit(): void {}
     
 		read(): Observable<CidadeFull[]> {   
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -32,7 +33,7 @@ import { Cidade, CidadeFull } from './cidades.model';
 		}	
 
 		readById(id: string): Observable<Cidade> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -47,7 +48,7 @@ import { Cidade, CidadeFull } from './cidades.model';
 		}
 		
 		create(cidade: Cidade): Observable<Cidade> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",
@@ -62,7 +63,7 @@ import { Cidade, CidadeFull } from './cidades.model';
 		}
 		
 		update(cidade: Cidade): Observable<Cidade> {
-			let token = localStorage.getItem('@sisGerTransPac-t')
+			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
 				"Access-Control-Allow-Credentials": "true",

@@ -4,12 +4,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { NotfoundComponent } from './modules/components/notfound/notfound.component';
-import { ProductService } from './modules/service/product.service';
-import { CustomerService } from './modules/service/customer.service';
-import { EventService } from './modules/service/event.service';
-import { IconService } from './modules/service/icon.service';
-import { NodeService } from './modules/service/node.service';
-import { PhotoService } from './modules/service/photo.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
     declarations: [
@@ -20,9 +15,8 @@ import { PhotoService } from './modules/service/photo.service';
         AppLayoutModule
     ],
     providers: [
-        Location, {provide: LocationStrategy, useClass: PathLocationStrategy},
-        CustomerService, EventService, IconService, NodeService,
-        PhotoService, ProductService
+        CookieService,
+        Location, {provide: LocationStrategy, useClass: PathLocationStrategy}
     ],
     bootstrap: [AppComponent]
 })
