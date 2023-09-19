@@ -32,7 +32,7 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
         AppFooterComponent,
         AppMenuComponent,
         AppSidebarComponent,
-        AppLayoutComponent,
+        AppLayoutComponent
     ],
     imports: [
         BrowserModule,

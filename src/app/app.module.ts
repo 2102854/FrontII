@@ -5,10 +5,11 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppLayoutModule } from './layout/app.layout.module';
 import { NotfoundComponent } from './modules/components/notfound/notfound.component';
 import { CookieService } from 'ngx-cookie-service';
+import { VLibrasComponent } from './modules/components/vlibras/vlibras.component';
 
 @NgModule({
     declarations: [
-        AppComponent, NotfoundComponent
+        AppComponent, NotfoundComponent,VLibrasComponent
     ],
     imports: [
         AppRoutingModule,

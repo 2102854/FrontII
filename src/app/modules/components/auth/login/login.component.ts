@@ -44,6 +44,7 @@ export class LoginComponent implements OnInit {
         public cookieService: CookieService,
         public layoutService: LayoutService) 
     {  
+
         this.loginIsDisable = true;
         let vloginIsDisable: boolean = true;
         this.cookieGeolocation = this.cookieService.get('_sisgertranspac-g');
