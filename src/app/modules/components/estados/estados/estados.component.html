@@ -10,7 +10,7 @@
 				<div class="field col-12 md:col-6">
 					<div class="flex flex-wrap  justify-content-end">				
 						<p-button pRipple label="Voltar" styleClass="p-button-outlined p-button-secondary" name="voltar" id="voltar" (click)="cancel()"></p-button>
-                        <p-button pRipple label="Cadastrar" class="mx-1"  name="new" id="new" (click)="novoRegistro()"></p-button>
+                        <p-button pRipple label="Cadastrar" class="mx-1"  name="new" id="new" (click)="novoRegistro()" [disabled]="!canRegister"></p-button>
 					</div>
 				</div>		
 			</div>
@@ -20,4 +20,3 @@
         </div>
     </div>
 </div>
-<!--</app-paises-list> [Pode_Atualizar_Paises] = "Pode_Atualizar_Paises"-->

@@ -22,7 +22,7 @@ export class VLibrasComponent implements OnInit {
       new window.VLibras.Widget(this.widgetSrc);
     };
     document.head.appendChild(script);
-    }, 1000)	
+    }, 800)	
   }
 
   ngOnInit() {

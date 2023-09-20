@@ -1,10 +1,10 @@
 <div class="card">
-    <p-table [value]="estados" [tableStyle]="{ 'min-width': '50rem' }" responsiveLayout="scroll" [paginator]="true" [rows]="8" [rowsPerPageOptions]="[5, 10, 15, 20]" >
+    <p-table [value]="estados" [tableStyle]="{ 'min-width': '50rem' }" responsiveLayout="scroll" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 15, 20]" >
         <ng-template pTemplate="header">
             <tr>
-                <th pSortableColumn="nome" style="width:40%">Nome<p-sortIcon field="code"></p-sortIcon></th>
-                <th pSortableColumn="pais_nome" style="width:40%">Nome<p-sortIcon field="code"></p-sortIcon></th>
-                <th style="width:15%">Sigla</th>
+                <th pSortableColumn="nome" style="width:60%">Nome<p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="pais_nome" style="width:30%">Pais<p-sortIcon field="code"></p-sortIcon></th>
+                <th style="width:5%">Sigla</th>
                 <th style="width:5%"></th>
             </tr>
         </ng-template>
@@ -14,9 +14,7 @@
                 <td>{{ estado.pais_nome }}</td>
                 <td>{{ estado.sigla }}</td>
                 <td>
-                    <a routerLink="/app/estados/update/{{estado.estado_id}}">
-                        <i class="bi bi-pencil-square"></i>          
-                    </a>  
+                    <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text" (click)="update(estado.estado_id)" [disabled]="!canModify"></p-button>  
                 </td>
             </tr>
         </ng-template>

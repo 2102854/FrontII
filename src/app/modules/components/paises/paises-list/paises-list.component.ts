@@ -1,8 +1,9 @@
-import { Component, Input , AfterViewInit, ViewChild,OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Pais } from './../paises.model';
 import { PaisesService } from "./../paises.service";
 import { SortEvent } from 'primeng/api';
-
+import { Router } from '@angular/router';
+import { LoginService } from './../../auth/login.service';
 
 @Component({
     selector: 'app-paises-list',
@@ -14,15 +15,27 @@ export class PaisesListComponent implements OnInit {
 
     paises: Pais[];
 
-    constructor(private paisesService: PaisesService ) { }
+    // Permissões do módulo - Verifica se o usuário pode alterar o registro
+    canModify:boolean =   this.loginService.havePermission('Pode_Editar_Pais');
+
+    constructor(private router: Router, private paisesService: PaisesService, private loginService: LoginService ) { }
 
     ngOnInit(): void {
+        // Recupera a lista de objetos e exibe no grid
         this.paisesService.read().subscribe(paises => {
             this.paises = paises;          
         });
     }  
-    
-    customSort(event: SortEvent) {
+
+    update(id: number): void {
+        // Permissões do módulo - Se o usuário tem permissão, redireciona para a página de alteração
+        if (this.canModify){
+		    this.router.navigate([`/app/paises/update/${id}`]);            
+        }        
+    }
+
+    // Método sort do grid
+    customSort(event: SortEvent) {        
         event.data.sort((data1, data2) => {
             let value1 = data1[event.field];
             let value2 = data2[event.field];

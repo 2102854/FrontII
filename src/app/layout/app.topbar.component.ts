@@ -15,9 +15,6 @@ export class AppTopBarComponent implements OnInit {
 
     key = String(this.cookieService.get('_sisgertranspac-c'));
     crypto = String(this.cookieService.get('_sisgertranspac-n'));
-
-    
-
     usuario = CryptoJS.AES.decrypt(this.crypto, this.key).toString(CryptoJS.enc.Utf8) 
 
     items!: MenuItem[];

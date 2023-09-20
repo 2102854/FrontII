@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { LoginService } from './../login.service';
 import { Authorization } from './../authorization.model';
-//import { Auth_Geolocation } from './../auth.model';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import * as CryptoJS from 'crypto-js';
-
 import IPData from 'ipdata';
 import {CookieService} from 'ngx-cookie-service';
 
@@ -60,7 +58,7 @@ export class LoginComponent implements OnInit {
             .then(function(info) {
                 let geolocation = `ip:${info.ip}|city:${info.city}|region_code:${info.region_code}|country_name:${info.country_name}|country_code:${info.country_code}|latitude:${info.latitude}|longitude:${info.longitude}|flag:${info.flag}|carrier_name:${info.asn.name}|carriet_type:${info.asn.type}|time_zone:${info.time_zone.name}` 
                 let result =CryptoJS.AES.encrypt(geolocation, secretKey).toString();
-                cookieService.set('_sisgertranspac-g', result, { expires: 5 });
+                cookieService.set('_sisgertranspac-g', result, { expires: 5, path: '/', sameSite:'Strict' });
                 if(info.city === 'Ribeirão Preto'){
                     vloginIsDisable = false;
                 } else {
@@ -74,7 +72,6 @@ export class LoginComponent implements OnInit {
 
         } 
 
-        //this.loginService.validateSession()
         setTimeout(() => {
              if (this.loginService.sessionIsValid){                
                 this.router.navigate(['/app/dashboard'])
@@ -117,22 +114,12 @@ export class LoginComponent implements OnInit {
                 let cryptoPermissoes = CryptoJS.AES.encrypt(auth.permissoes.toString(), session_key).toString();
 
                 //Salva os cookies com os dados da sessão
-                this.cookieService.set('_sisgertranspac-t', auth.token, { expires: 1 });
-                this.cookieService.set('_sisgertranspac-n', `${cryptoNome}`, { expires: 1 });
-                this.cookieService.set('_sisgertranspac-p', `${cryptoPermissoes}`, { expires: 1 });
-                this.cookieService.set('_sisgertranspac-c', `${session_key}`, { expires: 1 });
-
-                //this.cookieService.set('@sisGerTransPac-t', auth.token, { expires: 5 });
-                //this.cookieValue = this.cookieService.get('@sisGerTransPac-t');
-                //console.log(this.cookieValue)
-                //localStorage.setItem('@sisGerTransPac-t', auth.token)
-                ///localStorage.setItem('@sisGerTransPac-n', `${cryptoNome}`)
-                //localStorage.setItem('@sisGerTransPac-p', `${cryptoPermissoes}`)
-                //localStorage.setItem('@sisGerTransPac-k', `${session_key}`)
-                //this.loginService.sessionIsValid = true
-                
+                this.cookieService.set('_sisgertranspac-t', auth.token, { expires: 1, path: '/', sameSite:'Strict'});
+                this.cookieService.set('_sisgertranspac-n', `${cryptoNome}`, { expires: 1, path: '/', sameSite:'Strict'});
+                this.cookieService.set('_sisgertranspac-p', `${cryptoPermissoes}`, { expires: 1, path: '/', sameSite:'Strict'});
+                this.cookieService.set('_sisgertranspac-c', `${session_key}`, { expires: 1, path: '/', sameSite:'Strict'});
+               
                 setTimeout(() => {
-                    //location.reload()
                     this.router.navigate(['/app/dashboard'])
                 }, 1000)
 
@@ -140,7 +127,6 @@ export class LoginComponent implements OnInit {
             complete: () => {},
             error: (e) => {
                 console.log(e)
-                //location.reload()
                 localStorage.clear(); 
                 this.loginService.sessionIsValid = false
                 this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail:  e.error['message err'] });   
