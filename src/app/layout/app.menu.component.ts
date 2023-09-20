@@ -67,7 +67,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Tipos de Doenças',
                                 icon: 'bi bi-bug',
-                                routerLink: ['/app/tipos_doenca']
+                                routerLink: ['/app/disease_types']
                             },
                             {
                                 label: 'Tipos de Remoção',

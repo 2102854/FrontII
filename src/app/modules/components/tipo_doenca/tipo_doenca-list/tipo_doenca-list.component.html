@@ -1,0 +1,21 @@
+<div class="card">
+    <p-table [value]="tipo_doenca" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="8" [rowsPerPageOptions]="[5, 10, 15, 20]" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr>                
+                <th pSortableColumn="nome" style="width:90%">Nome<p-sortIcon field="code"></p-sortIcon></th>
+                <th style="width:10%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tipo_doenca>
+            <tr>
+                <td>{{ tipo_doenca.nome }}</td>
+
+                <td>
+                    <a routerLink="/app/disease_types/update/{{tipo_doenca.tipo_doenca_id}}">
+                        <i class="bi bi-pencil-square"></i>          
+                    </a>  
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

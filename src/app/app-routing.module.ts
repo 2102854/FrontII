@@ -17,7 +17,8 @@ import { LoginComponent } from './modules/components/auth/login/login.component'
                     { path: 'estados', loadChildren: () => import('./modules/components/estados/estados.module').then(m => m.EstadosModule) },
                     { path: 'cidades', loadChildren: () => import('./modules/components/cidades/cidades.module').then(m => m.CidadesModule) },
                     { path: 'veiculos', loadChildren: () => import('./modules/components/veiculos/veiculos.module').then(m => m.VeiculosModule) },
-                    { path: 'motoristas', loadChildren: () => import('./modules/components/motoristas/motoristas.module').then(m => m.VeiculosModule) }
+                    { path: 'motoristas', loadChildren: () => import('./modules/components/motoristas/motoristas.module').then(m => m.VeiculosModule)},
+                    { path: 'disease_types', loadChildren: () => import('./modules/components/tipo_doenca/tipo_doenca.module').then(m => m.Tipos_DoencaModule) }
                 ]
             },
             { path: '', component: LoginComponent },
