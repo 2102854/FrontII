@@ -108,6 +108,19 @@ export class AppMenuComponent implements OnInit {
                                 visible: this.loginService.havePermission('Pode_Visualizar_Tipo_Encaminhamento')
                             }                            
                         ]
+                    },
+                    {
+                        label: 'Usuários do Sistema',
+                        icon: 'pi pi-users pi-cog',
+                        items: [
+                            {
+                                label: 'Lista de Usuários',
+                                icon: 'pi pi-user pi-cog    ',
+                                routerLink: ['/app/auth/usuarios'],
+                                visible: this.loginService.havePermission('Pode_Visualizar_Usuarios')
+
+                            }
+                        ]
                     }
                 ]
             }

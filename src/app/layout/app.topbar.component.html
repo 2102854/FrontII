@@ -24,3 +24,45 @@
 </div>
 <p-toast></p-toast>
 <p-confirmDialog [style]="{width: '350px'}" acceptButtonStyleClass="p-button-text-danger" rejectButtonStyleClass="p-button-text"></p-confirmDialog>
+
+<p-dialog [(visible)]="change_password" [style]="{width: '450px'}" header="Alteraçao de Senha" [modal]="true" class="p-fluid">
+    <label for="actual_password" class="block text-900 font-medium text-xl mb-2">Senha atual</label>
+    <p-password 
+        id="actual_password" 
+        placeholder="Senha" 
+        [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"
+        feedback = "false"
+        >                                               
+    </p-password>
+    <label for="new_password" class="block text-900 font-medium text-xl mb-2">Digite a nova senha</label>
+    <p-password 
+        id="new_password" 
+        placeholder="Digite a nova senha" 
+        [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem" 
+        weakLabel = "Infelizmente, sua senha é muito fraca!" 
+        mediumLabel="Melhorou, mas ainda não é suficiente!" 
+        strongLabel="Ótimo, sua senha é forte" 
+        promptLabel="Informe sua senha de acesso"
+        strongRegex="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#_.,:;$%^&*\-])(?=.{8,})"
+        >
+        <ng-template pTemplate="footer">
+            <p-divider type="solid"></p-divider>
+            <ul class="pl-2 ml-2 mt-0 text-600 text-1xl" style="line-height: 1.5">
+                <li>Pelo menos, uma letra maiúscula</li>
+                <li>Pelo menos, uma letra minúscula</li>
+                <li>Pelo menos, um caracter especial (@ #, _. : ; $ % ^ & * )</li>
+                <li>Pelo menos, um número</li>
+                <li>Mínimo de 8 caracteres</li>
+            </ul>
+        </ng-template>                                                
+    </p-password>
+    <label for="confirm_password" class="block text-900 font-medium text-xl mb-2">Confirme a nova senha</label>
+    <p-password 
+        id="confirm_password" 
+        placeholder="Confirme a nova senha" 
+        [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"
+        feedback = "false"
+        >                                               
+    </p-password>        
+
+</p-dialog>
