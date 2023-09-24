@@ -7,6 +7,7 @@ import { MessageService } from 'primeng/api';
 import * as CryptoJS from 'crypto-js';
 import IPData from 'ipdata';
 import {CookieService} from 'ngx-cookie-service';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -46,14 +47,14 @@ export class LoginComponent implements OnInit {
         this.loginIsDisable = true;
         let vloginIsDisable: boolean = true;
         this.cookieGeolocation = this.cookieService.get('_sisgertranspac-g');
-        let secretKey = "YourSecretKeyForEncryption&Descryption";
+        let secretKey = environment.appSecretKey;
 
         if (this.cookieGeolocation == null || this.cookieGeolocation == '') {
             const cacheConfig = {
                 max: 1000, // max size
                 maxAge: 10 * 60 * 1000, // max age in ms (i.e. 10 minutes)
             };
-            const ipdata = new IPData('8cf9fde1a742147df75e51f9d37b651726eba0d583bb3a997e5c908e', cacheConfig);
+            const ipdata = new IPData(environment.ipData, cacheConfig);
             ipdata.lookup()
             .then(function(info) {
                 let geolocation = `ip:${info.ip}|city:${info.city}|region_code:${info.region_code}|country_name:${info.country_name}|country_code:${info.country_code}|latitude:${info.latitude}|longitude:${info.longitude}|flag:${info.flag}|carrier_name:${info.asn.name}|carriet_type:${info.asn.type}|time_zone:${info.time_zone.name}` 
@@ -82,13 +83,13 @@ export class LoginComponent implements OnInit {
 
     valCheck: string[] = ['remember'];
 
-    password!: string;
+    password!: string; 
 
     ngOnInit(): void {
         setTimeout(() => {
             this.cookieGeolocation = this.cookieService.get('_sisgertranspac-g');
             if (this.cookieGeolocation !== null && this.cookieGeolocation !== '') {
-                let secretKey = "YourSecretKeyForEncryption&Descryption";
+                let secretKey = environment.appSecretKey;
                 let result = CryptoJS.AES.decrypt(this.cookieGeolocation, secretKey).toString(CryptoJS.enc.Utf8);
                 if (result !== null && result !== ''){
                     let geolocation = result.split("|")
@@ -112,12 +113,14 @@ export class LoginComponent implements OnInit {
                 let session_key = auth.session_key
                 let cryptoNome = CryptoJS.AES.encrypt(auth.nome, session_key).toString();
                 let cryptoPermissoes = CryptoJS.AES.encrypt(auth.permissoes.toString(), session_key).toString();
+                let cryptoUsuario_id = CryptoJS.AES.encrypt(auth.usuario_id.toString(), session_key).toString();
 
                 //Salva os cookies com os dados da sessão
                 this.cookieService.set('_sisgertranspac-t', auth.token, { expires: 1, path: '/', sameSite:'Strict'});
                 this.cookieService.set('_sisgertranspac-n', `${cryptoNome}`, { expires: 1, path: '/', sameSite:'Strict'});
                 this.cookieService.set('_sisgertranspac-p', `${cryptoPermissoes}`, { expires: 1, path: '/', sameSite:'Strict'});
                 this.cookieService.set('_sisgertranspac-c', `${session_key}`, { expires: 1, path: '/', sameSite:'Strict'});
+                this.cookieService.set('_sisgertranspac-i', `${cryptoUsuario_id}`, { expires: 1, path: '/', sameSite:'Strict'});
                
                 setTimeout(() => {
                     this.router.navigate(['/app/dashboard'])

@@ -3,6 +3,8 @@ import { MenuItem,  MessageService, ConfirmationService} from 'primeng/api';
 import { LayoutService } from "./service/app.layout.service";
 import { Router } from '@angular/router';
 import { LoginService} from './../modules/components/auth/login.service';
+import { UsuariosService } from './../modules/components/usuarios/usuarios.service';
+import { ChangePassword } from './../modules/components/usuarios/usuarios.model';
 import * as CryptoJS from 'crypto-js';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -14,10 +16,15 @@ import { CookieService } from 'ngx-cookie-service';
 export class AppTopBarComponent implements OnInit {
 
     key = String(this.cookieService.get('_sisgertranspac-c'));
-    crypto = String(this.cookieService.get('_sisgertranspac-n'));
-    usuario = CryptoJS.AES.decrypt(this.crypto, this.key).toString(CryptoJS.enc.Utf8) 
+    
+    nomeCrypto = String(this.cookieService.get('_sisgertranspac-n'));
+    usuarioIdCrypto = String(this.cookieService.get('_sisgertranspac-i'));
+    
+    usuario = CryptoJS.AES.decrypt(this.nomeCrypto, this.key).toString(CryptoJS.enc.Utf8) 
+    user_id = CryptoJS.AES.decrypt(this.usuarioIdCrypto, this.key).toString(CryptoJS.enc.Utf8) 
 
-    change_password: boolean = false;
+    form_change_password: boolean = false;
+    cp: ChangePassword;
 
     items!: MenuItem[];
 
@@ -29,13 +36,45 @@ export class AppTopBarComponent implements OnInit {
 
     constructor(
         private router: Router, private messageService: MessageService, private confirmationService: ConfirmationService, 
-        private loginService: LoginService , public layoutService: LayoutService, public cookieService: CookieService) { }
+        private loginService: LoginService , public layoutService: LayoutService, public cookieService: CookieService,
+        private usuariosService: UsuariosService) { }
 
-    update() {
-        //this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Data Updated' })
-        this.router.navigate(['/auth/login'])
+    showChangePassword() {
+        this.cp = {
+            user_id_to_be_changed: this.user_id,
+            old_pass: '',
+            new_pass: '',
+            new_pass_confirmed: ''
+        } 
+        this.form_change_password = true;
     }
   
+    hideDialog() {
+        this.form_change_password = false;
+    }
+    
+    changePassword() {
+        this.form_change_password = false;
+
+        this.usuariosService.changePassword(this.cp).subscribe({
+            next: () => {
+                this.messageService.add({key: 'tst', severity: 'success', summary: 'SUCESSO', detail: 'Senha alterada com sucesso!' });
+                setTimeout(() => {
+                    this.loginService.executeLogout();
+                }, 2500)                                
+            },
+            complete: () => {},
+            error: (e) => { 
+                if (e.error['message err'] !== undefined) {
+                    this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail: e.error['message err'] });
+                } else {
+                    this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail: 'Não foi possível executar a ação.' });
+                }
+                
+            }	
+        })
+    }
+
     logoutQuestion() {
         this.confirmationService.confirm({
             message: 'Você tem certeza que deseja sair?',
@@ -64,7 +103,7 @@ export class AppTopBarComponent implements OnInit {
                         label: 'Trocar Senha',
                         icon: 'bi bi-key',
                         command: () => {
-                            //this.update();
+                            this.showChangePassword();
                         }
                     },
                     {
@@ -77,5 +116,12 @@ export class AppTopBarComponent implements OnInit {
                 ]
             }
         ];
+
+        this.cp = {
+            user_id_to_be_changed: this.user_id,
+            old_pass: '',
+            new_pass: '',
+            new_pass_confirmed: ''
+        }     
     }
 }

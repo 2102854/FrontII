@@ -1,5 +1,5 @@
-export class Auth {
-    result: string
+export interface Auth {
+    result: string,
     message: string 
 }
 

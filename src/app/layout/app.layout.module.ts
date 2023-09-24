@@ -19,6 +19,8 @@ import { AppSidebarComponent } from "./app.sidebar.component";
 import { AppLayoutComponent } from "./app.layout.component";
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { PasswordModule } from 'primeng/password';
 
 
 import { MenuModule } from 'primeng/menu';
@@ -49,7 +51,9 @@ import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
         AppConfigModule,
         MenuModule,
         ToastModule,
-        ConfirmDialogModule
+        ConfirmDialogModule,
+        DialogModule,
+        PasswordModule
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA],
     exports: [AppLayoutComponent]

@@ -1,5 +1,5 @@
-import { Authorization } from './authorization.model';
-import { Injectable, EventEmitter } from '@angular/core';
+import { Authorization} from './authorization.model';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -107,19 +107,12 @@ export class LoginService {
 	}
 
 	delete_cookies() {
-		//Exclui apenas os cookies de sessão  /auth
-		this.cookieService.delete('_sisgertranspac-t');
-		this.cookieService.delete('_sisgertranspac-t','/app');
-		this.cookieService.delete('_sisgertranspac-t','/auth');
-		this.cookieService.delete('_sisgertranspac-n');
-		this.cookieService.delete('_sisgertranspac-n','/app');
-		this.cookieService.delete('_sisgertranspac-n','/auth');
-		this.cookieService.delete('_sisgertranspac-p');
-		this.cookieService.delete('_sisgertranspac-p','/app');
-		this.cookieService.delete('_sisgertranspac-p','/auth');
-		this.cookieService.delete('_sisgertranspac-c');	
-		this.cookieService.delete('_sisgertranspac-c','/app');	
-		this.cookieService.delete('_sisgertranspac-c','/auth');
+		//Exclui apenas os cookies de sessão
+		this.cookieService.delete('_sisgertranspac-t','/');
+		this.cookieService.delete('_sisgertranspac-n','/');
+		this.cookieService.delete('_sisgertranspac-p','/');
+		this.cookieService.delete('_sisgertranspac-c','/');
+		this.cookieService.delete('_sisgertranspac-i','/');
 	}
 
 	executeLogout():void {
