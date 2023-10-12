@@ -4,3 +4,12 @@ export interface ChangePassword {
     new_pass?: string,
     new_pass_confirmed?: string
 }
+
+export interface User {
+    usuario_id: number,
+    username: string,
+    primeiro_nome: string,
+    sobrenome: string,
+    email: string,
+    ativo: boolean
+}

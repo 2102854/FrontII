@@ -1,0 +1,90 @@
+<div class="card">
+    <p-table [value]="users" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true" [rows]="5" [rowsPerPageOptions]="[5, 10, 15, 20]" responsiveLayout="scroll">
+        <ng-template pTemplate="header">
+            <tr> 
+                <th pSortableColumn="username" style="width:10%">Username<p-sortIcon field="code"></p-sortIcon></th>               
+                <th pSortableColumn="primeiro_nome" style="width:20%">Primeiro Nome<p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="sobrenome" style="width:20%">Sobrenome<p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="email" style="width:30%">E-mail<p-sortIcon field="code"></p-sortIcon></th>
+                <th style="width:5%">Ativo</th>
+                <th style="width:5%"></th>
+                <th style="width:5%"></th>
+                <th style="width:5%"></th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user>
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.primeiro_nome }}</td>
+                <td>{{ user.sobrenome }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                    <div *ngIf="user.ativo"><i class="pi pi-check" style="color: #708090; font-size: 1.1rem"></i></div>
+                    <div *ngIf="!user.ativo"><i class="pi pi-ban" style="color: #708090; font-size: 1.1rem"></i></div>
+                </td>
+                <td>
+                    <p-button icon="pi pi-tags" styleClass="p-button-rounded p-button-text" (click)="update(user.usuario_id)" [disabled]="!canModify" pTooltip="Permissões"></p-button> 
+                </td>
+                <td>
+                    <p-button icon="pi bi bi-key" styleClass="p-button-rounded p-button-text" (click)="showChangePassword(user.usuario_id, user.primeiro_nome, user.sobrenome)" [disabled]="!canModify" pTooltip="Alteração de senha"></p-button> 
+                </td>                                
+                <td>
+                    <p-button icon="pi pi-pencil"  styleClass="p-button-rounded p-button-text" (click)="update(user.usuario_id)" [disabled]="!canModify" pTooltip="Editar Usuário"></p-button> 
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>
+<p-toast key="tst"></p-toast>
+<p-dialog [(visible)]="form_change_password" [style]="{width: '450px'}" 
+    header="Alteraçao de Senha" 
+    [modal]="true" class="p-fluid"
+    closeOnEscape = "true"
+    >
+    <ng-template pTemplate="content">   
+        <div class="field">
+            <div class="block text-900 font-medium text-xl mb-2">{{nomeAlteracao}}</div>
+            <label for="new_password" class="block text-900 font-medium text-xl mb-2">Digite a nova senha</label>
+            <p-password 
+                id="new_password" 
+                placeholder="Digite a nova senha" 
+                [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem" 
+                weakLabel = "Infelizmente, sua senha é muito fraca!" 
+                mediumLabel="Melhorou, mas ainda não é suficiente!" 
+                strongLabel="Ótimo, sua senha é forte" 
+                promptLabel="Informe sua senha de acesso"
+                strongRegex="^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#_.,:;$%^&*\-])(?=.{8,})"
+                [(ngModel)]="cp.new_pass"
+                >
+                <ng-template pTemplate="footer">
+                    <p-divider type="solid"></p-divider>
+                    <ul class="pl-2 ml-2 mt-0 text-600 text-1xl" style="line-height: 1.5">
+                        <li>Pelo menos, uma letra maiúscula</li>
+                        <li>Pelo menos, uma letra minúscula</li>
+                        <li>Pelo menos, um caracter especial (@ #, _. : ; $ % ^ & * )</li>
+                        <li>Pelo menos, um número</li>
+                        <li>Mínimo de 8 caracteres</li>
+                    </ul>
+                </ng-template>                                                
+            </p-password>
+        </div>
+        <label for="confirm_password" class="block text-900 font-medium text-xl mb-2">Confirme a nova senha</label>
+        <p-password 
+            id="confirm_password" 
+            placeholder="Confirme a nova senha" 
+            [toggleMask]="true" styleClass="mb-5" inputStyleClass="w-full p-3 md:w-30rem"
+            placeholder="Confirme a nova senha" 
+            promptLabel="Confirme a nova senha"
+            weakLabel = "Senha é fraca!" 
+            mediumLabel="Complexidade é insuficiente!" 
+            strongLabel="Senha digitada é forte"
+            [(ngModel)]="cp.new_pass_confirmed" 
+            >                                               
+        </p-password>
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <button pButton pRipple label="Cancelar" icon="pi pi-times" class="p-button-text" (click)="hidePasswordDialog()"></button>
+        <button pButton pRipple label="Alterar" icon="pi pi-check" class="p-button-text" (click)="changePassword()"></button>
+    </ng-template>        
+
+</p-dialog>

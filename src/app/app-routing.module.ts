@@ -20,6 +20,7 @@ import { LoginComponent } from './modules/components/auth/login/login.component'
                     { path: 'motoristas', loadChildren: () => import('./modules/components/motoristas/motoristas.module').then(m => m.VeiculosModule)},
                     { path: 'disease_types', loadChildren: () => import('./modules/components/tipo_doenca/tipo_doenca.module').then(m => m.Tipos_DoencaModule) },
                     { path: 'tipos_remocao', loadChildren: () => import('./modules/components/tipo_remocao/tipo_remocao.module').then(m => m.Tipos_RemocaoModule) },
+                    { path: 'usuarios', loadChildren: () => import('./modules/components/usuarios/usuarios.module').then(m => m.UsuariosModule) },
                 ]
             },
             { path: '', component: LoginComponent },

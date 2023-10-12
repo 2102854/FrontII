@@ -116,7 +116,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Lista de Usuários',
                                 icon: 'pi pi-user pi-cog    ',
-                                routerLink: ['/app/auth/usuarios'],
+                                routerLink: ['/app/usuarios'],
                                 visible: this.loginService.havePermission('Pode_Visualizar_Usuarios')
 
                             }
