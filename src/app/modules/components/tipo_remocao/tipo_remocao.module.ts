@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Tipo_RemocaoComponent } from './tipo_remocao/tipo_remocao.component';
 import { Tipo_RemocaoListComponent } from './tipo_remocao_list/tipo_remocao-list.component';
+import { Tipo_RemocaoNewComponent } from './tipo_remocao_new/tipo_remocao_new.component';
+import { Tipo_RemocaoUpdateComponent } from './tipo_remocao_update/tipo_remocao_update.component';
 import { Tipos_RemocaoRoutingModule } from './tipo_remocao-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -27,7 +29,9 @@ import { ToastModule } from 'primeng/toast';
 @NgModule({
   declarations: [
     Tipo_RemocaoComponent,
-    Tipo_RemocaoListComponent
+    Tipo_RemocaoListComponent,
+    Tipo_RemocaoUpdateComponent,
+    Tipo_RemocaoNewComponent
   ],
   imports: [
     CommonModule,

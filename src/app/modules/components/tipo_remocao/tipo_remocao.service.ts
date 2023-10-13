@@ -63,7 +63,7 @@ import { Tipo_Remocao } from './tipo_remocao.model';
 			const url = `${this.baseUrl}/add`
 			return this.httpCliente.post<Tipo_Remocao>(url, tipo_remocao, { headers: headers})
 		}
-		
+
 		update(tipo_remocao: Tipo_Remocao): Observable<Tipo_Remocao> {
 			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
@@ -77,5 +77,5 @@ import { Tipo_Remocao } from './tipo_remocao.model';
 			} ) 			
 			const url = `${this.baseUrl}/update/${tipo_remocao.tipo_remocao_id}`
 			return this.httpCliente.put<Tipo_Remocao>(url, tipo_remocao, { headers: headers})
-		}		
+		}				
 }

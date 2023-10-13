@@ -31,7 +31,7 @@ export class Tipo_RemocaoListComponent implements OnInit {
     update(id: number): void {
         // Permissões do módulo - Se o usuário tem permissão, redireciona para a página de alteração
         if (this.canModify){
-		    this.router.navigate([`/app/estados/update/${id}`]);            
+		    this.router.navigate([`/app/tipos_remocao/update/${id}`]);            
         }        
     } 
     
