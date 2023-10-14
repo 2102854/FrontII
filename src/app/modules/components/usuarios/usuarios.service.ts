@@ -115,6 +115,23 @@ export class UsuariosService {
 		} )	
 		const newUrl = `${environment.baseUrl}/permissions`					 
 		return this.httpCliente.get<Permission[]>(newUrl,{ headers: headers})
+	}
+
+	get_permissao_usuario(idUser: number): Observable<Permission[]> {  
+		let token = this.cookieService.get('_sisgertranspac-t')
+		let headers = new HttpHeaders({  
+			"x-access-token": String(token),
+			"Access-Control-Allow-Credentials": "true",
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "GET",
+			"Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept",
+			"Content-Type" : "application/json",
+			"Accept" : "application/json"
+		} )	
+		const newUrl = `${environment.baseUrl}/permissions/${idUser}`					 
+		return this.httpCliente.get<Permission[]>(newUrl,{ headers: headers})
 	}	
+	
+	//changePermission 
 
 }

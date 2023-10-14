@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { User, ChangePassword, Permission } from './../usuarios.model';
+import { User, ChangePassword, Permission} from './../usuarios.model';
 import { UsuariosService } from "./../usuarios.service";
 import { SortEvent } from 'primeng/api';
 import { Router } from '@angular/router';
 import { LoginService } from './../../auth/login.service';
 import { MessageService} from 'primeng/api';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-usuarios-list',
@@ -14,10 +15,12 @@ import { MessageService} from 'primeng/api';
 })
 
 export class UsuariosListComponent implements OnInit {
+    formGroup!: FormGroup;
 
     users: User[];
     permissoes: Permission[];
-
+    userPermission: boolean[] = [];
+    
     // Permissões do usuário
     form_permission: boolean = false;
 
@@ -39,17 +42,52 @@ export class UsuariosListComponent implements OnInit {
         this.usuariosService.read().subscribe(users => {
             this.users = users;          
         });
+
+        // Carrega a lista de permissoes no GRID
+        this.usuariosService.get_permissao().subscribe(permissoes => {
+            this.permissoes = permissoes; 
+            this.resetListPermissions();               
+        });
     }  
 
     // Alteração das permissões de usuário
+    resetListPermissions(){
+        for (let i = 0; i < this.permissoes.length; i++) {
+            this.userPermission[i] = false;                
+        }   
+    }
+
+    getIcon(i: number){
+        let icone: string = 'pi pi-ban';
+        if (this.userPermission[i] == true){
+            icone = 'pi pi-check';
+        }
+        return icone
+    }
+
+    changePermission(i: number){
+        console.log(i);
+        this.userPermission[i] = !this.userPermission[i];       
+        console.log(this.userPermission);
+    }
+
     showChangePermissions(user_id: number, nome: string, sobrenome: string ) {
+        
+        this.resetListPermissions();
+
         this.nomeAlteracao = nome + ' ' + sobrenome;
         this.idUsuarioAlteracao = user_id;
         this.form_permission = true;
-        this.usuariosService.get_permissao().subscribe(permissoes => {
-            this.permissoes = permissoes;  
-            console.log(this.permissoes)
-        })
+
+        this.usuariosService.get_permissao_usuario(user_id).subscribe(permissoes => {
+            for (let i = 0; i < permissoes.length; i++) {
+                for ( let x = 0; x <= this.permissoes.length; x++) {
+                    if (x == Number(permissoes[i]['permissao_id'])) {
+                        this.userPermission[x] = true;
+                    }
+                }                
+            }              
+        })  
     }
 
     // Alteração de senha de usuários
