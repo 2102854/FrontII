@@ -3,14 +3,14 @@
 		<div class="card" style="padding-bottom: 3px; padding-top: 25px;">
 			<div class="py-0 p-fluid p-formgrid grid">
 				<div class="field col-12 md:col-6">
-					<h5 class="my-0">Lista de Tipos de Doenças</h5>
-					<span>Tipos de Doenças Cadastrados no Sistema</span>
+					<h5 class="my-0">Lista dos Tipos de Encaminhamentos</h5>
+					<span>Tipos de Encaminhamentos Cadastrados no Sistema</span>
 					<p-breadcrumb class="max-w-full" id="breadcrumb" [model]="items" [home]="home" [style]="{border: 'none'}" ></p-breadcrumb>
 				</div>
 				<div class="field col-12 md:col-6">
 					<div class="flex flex-wrap  justify-content-end">				
 						<p-button pRipple label="Voltar" styleClass="p-button-outlined p-button-secondary" name="voltar" id="voltar" (click)="cancel()"></p-button>
-                        <p-button pRipple label="Cadastrar" class="mx-1"  name="new" id="new" (click)="novoRegistro()"></p-button>
+                        <p-button pRipple label="Cadastrar" class="mx-1"  name="new" id="new" (click)="novoRegistro()" [disabled]="!canRegister"></p-button>
 					</div>
 				</div>		
 			</div>
@@ -18,8 +18,7 @@
 
 
         <div class="card p-fluid">
-            <app-tipo_doenca-list></app-tipo_doenca-list>
+            <app-tipo_encaminhamento-list></app-tipo_encaminhamento-list>
         </div>
     </div>
 </div>
-<!--</app-paises-list> [Pode_Atualizar_Paises] = "Pode_Atualizar_Paises"-->

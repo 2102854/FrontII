@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { User, ChangePassword } from './../usuarios.model';
+import { User, ChangePassword, Permission } from './../usuarios.model';
 import { UsuariosService } from "./../usuarios.service";
 import { SortEvent } from 'primeng/api';
 import { Router } from '@angular/router';
@@ -16,15 +16,21 @@ import { MessageService} from 'primeng/api';
 export class UsuariosListComponent implements OnInit {
 
     users: User[];
+    permissoes: Permission[];
+
+    // Permissões do usuário
+    form_permission: boolean = false;
 
     // Alteração de senha do usuário
     cp: ChangePassword;
     form_change_password: boolean = false;
+
+    // Identifica o usuário para alteração
     nomeAlteracao: string;
     idUsuarioAlteracao: number = 0;
 
     // Permissões do módulo - Verifica se o usuário pode alterar o registro
-    canModify:boolean =   this.loginService.havePermission('Pode_Atualizar_Usuarios');
+    canModify:boolean = this.loginService.havePermission('Pode_Atualizar_Usuarios');
 
     constructor(private router: Router, private usuariosService: UsuariosService, private loginService: LoginService,  private messageService: MessageService, ) { }
 
@@ -35,6 +41,18 @@ export class UsuariosListComponent implements OnInit {
         });
     }  
 
+    // Alteração das permissões de usuário
+    showChangePermissions(user_id: number, nome: string, sobrenome: string ) {
+        this.nomeAlteracao = nome + ' ' + sobrenome;
+        this.idUsuarioAlteracao = user_id;
+        this.form_permission = true;
+        this.usuariosService.get_permissao().subscribe(permissoes => {
+            this.permissoes = permissoes;  
+            console.log(this.permissoes)
+        })
+    }
+
+    // Alteração de senha de usuários
     showChangePassword(user_id: number, nome: string, sobrenome: string ) {
         this.nomeAlteracao = nome + ' ' + sobrenome;
         this.idUsuarioAlteracao = user_id;

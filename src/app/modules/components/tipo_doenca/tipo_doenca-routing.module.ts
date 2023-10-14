@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { Tipos_DoencaComponent } from './tipo_doenca/tipo_doenca.component';
-//import { PaisesNewComponent } from './paises_new/paises_new.component';
-//import { PaisesUpdateComponent }  from './paises_update/paises_update.component';
+import { Tipos_DoencaNewComponent } from './tipo_doenca_new/tipo_doenca_new.component';
+import { Tipos_DoencaUpdateComponent }  from './tipo_doenca_update/tipo_doenca_update.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
         { path: '', component: Tipos_DoencaComponent },
-        //{ path: 'create', component: PaisesNewComponent },
-        //{ path: 'update/:id', component: PaisesUpdateComponent }
+        { path: 'create', component: Tipos_DoencaNewComponent },
+        { path: 'update/:id', component: Tipos_DoencaUpdateComponent }
     ])],
     exports: [RouterModule]
 })

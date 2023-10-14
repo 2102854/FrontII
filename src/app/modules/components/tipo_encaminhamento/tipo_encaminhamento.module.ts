@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Tipos_DoencaComponent } from './tipo_doenca/tipo_doenca.component';
-import { Tipo_DoencaListComponent } from './tipo_doenca-list/tipo_doenca-list.component';
-import { Tipos_DoencaNewComponent} from './tipo_doenca_new/tipo_doenca_new.component';
-import { Tipos_DoencaUpdateComponent } from './tipo_doenca_update/tipo_doenca_update.component';
-import { Tipos_DoencaRoutingModule } from './tipo_doenca-routing.module';
+import { Tipo_EncaminhamentoComponent } from './tipo_encaminhamento/tipo_encaminhamento.component';
+import { Tipo_EncaminhamentoListComponent } from './tipo_encaminhamento-list/tipo_encaminhamento-list.component';
+import { Tipo_EncaminhamentoNewComponent} from './tipo_encaminhamento_new/tipo_encaminhamento_new.component';
+import { Tipo_EncaminhamentoUpdateComponent } from './tipo_encaminhamento_update/tipo_encaminhamento_update.component';
+import { Tipo_EncaminhamentoRoutingModule } from './tipo_encaminhamento-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -27,14 +27,14 @@ import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
-    Tipos_DoencaComponent,
-    Tipo_DoencaListComponent,
-    Tipos_DoencaNewComponent,
-    Tipos_DoencaUpdateComponent
+    Tipo_EncaminhamentoComponent,
+    Tipo_EncaminhamentoListComponent,
+    Tipo_EncaminhamentoNewComponent,
+    Tipo_EncaminhamentoUpdateComponent
   ],
   imports: [
     CommonModule,
-    Tipos_DoencaRoutingModule,
+    Tipo_EncaminhamentoRoutingModule,
     TableModule,
     ButtonModule,
 		RippleModule,
@@ -56,4 +56,4 @@ import { ToastModule } from 'primeng/toast';
     ToastModule
   ]
 })
-export class Tipos_DoencaModule { }
+export class Tipo_EncamimhamentoModule { }

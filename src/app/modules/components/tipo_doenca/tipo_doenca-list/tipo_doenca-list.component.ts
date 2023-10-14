@@ -2,6 +2,8 @@ import { Component, Input , AfterViewInit, ViewChild,OnInit } from '@angular/cor
 import { Tipo_Doenca } from './../tipo_doenca.model';
 import { Tipo_DoencaService } from "./../tipo_doenca.service";
 import { SortEvent } from 'primeng/api';
+import { LoginService } from './../../auth/login.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,14 +16,26 @@ export class Tipo_DoencaListComponent implements OnInit {
 
     tipo_doenca: Tipo_Doenca[];
 
-    constructor(private tipo_doencaService: Tipo_DoencaService ) { }
+    // Permissões do módulo - Verifica se o usuário pode alterar o registro
+    canModify:boolean =   this.loginService.havePermission('Pode_Editar_Tipo_Doenca');  
+
+    constructor(private router: Router, private tipo_doencaService: Tipo_DoencaService, private loginService: LoginService  ) { }
 
     ngOnInit(): void {
+        // Recupera a lista de objetos e exibe no grid
         this.tipo_doencaService.read().subscribe(tipo_doenca => {
             this.tipo_doenca = tipo_doenca;          
         });
     }  
+ 
+    update(id: number): void {
+        // Permissões do módulo - Se o usuário tem permissão, redireciona para a página de alteração
+        if (this.canModify){
+		    this.router.navigate([`/app/disease_types/update/${id}`]);            
+        }        
+    } 
     
+    // Método sort do grid   
     customSort(event: SortEvent) {
         event.data.sort((data1, data2) => {
             let value1 = data1[event.field];

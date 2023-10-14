@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-import { User } from './usuarios.model';
+import { User, Permission } from './usuarios.model';
 
 @Injectable({
   providedIn: 'root'
@@ -102,5 +102,19 @@ export class UsuariosService {
 		return this.httpCliente.put<User>(url, user, { headers: headers})
 	}		
 
+	get_permissao(): Observable<Permission[]> {  
+		let token = this.cookieService.get('_sisgertranspac-t')
+		let headers = new HttpHeaders({  
+			"x-access-token": String(token),
+			"Access-Control-Allow-Credentials": "true",
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "GET",
+			"Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept",
+			"Content-Type" : "application/json",
+			"Accept" : "application/json"
+		} )	
+		const newUrl = `${environment.baseUrl}/permissions`					 
+		return this.httpCliente.get<Permission[]>(newUrl,{ headers: headers})
+	}	
 
 }

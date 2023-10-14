@@ -27,6 +27,7 @@ import { ToastModule } from 'primeng/toast';
 import { TooltipModule } from 'primeng/tooltip';
 import { DialogModule } from 'primeng/dialog';
 import { PasswordModule } from 'primeng/password';
+import { DataViewModule } from 'primeng/dataview';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { PasswordModule } from 'primeng/password';
     ToastModule,
     TooltipModule,
     DialogModule,
-    PasswordModule
+    PasswordModule,
+    DataViewModule
   ]
 })
 export class UsuariosModule { }

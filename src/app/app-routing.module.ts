@@ -21,6 +21,7 @@ import { LoginComponent } from './modules/components/auth/login/login.component'
                     { path: 'disease_types', loadChildren: () => import('./modules/components/tipo_doenca/tipo_doenca.module').then(m => m.Tipos_DoencaModule) },
                     { path: 'tipos_remocao', loadChildren: () => import('./modules/components/tipo_remocao/tipo_remocao.module').then(m => m.Tipos_RemocaoModule) },
                     { path: 'usuarios', loadChildren: () => import('./modules/components/usuarios/usuarios.module').then(m => m.UsuariosModule) },
+                    { path: 'tipo_encaminhamento', loadChildren: () => import('./modules/components/tipo_encaminhamento/tipo_encaminhamento.module').then(m => m.Tipo_EncamimhamentoModule) },
                 ]
             },
             { path: '', component: LoginComponent },

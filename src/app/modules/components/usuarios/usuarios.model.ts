@@ -13,3 +13,12 @@ export interface User {
     email: string,
     ativo: boolean
 }
+
+export interface Permission {
+    permissao_id: number,
+    permissao: string,
+    nome: string,
+    descricao: string,
+    modulo: string,
+    icon: string
+}

@@ -104,7 +104,7 @@ export class AppMenuComponent implements OnInit {
                             {
                                 label: 'Tipos de Encaminhamento',
                                 icon: 'bi bi-person-fill-up',
-                                routerLink: ['/app/tipos_encaminhamento'],
+                                routerLink: ['/app/tipo_encaminhamento'],
                                 visible: this.loginService.havePermission('Pode_Visualizar_Tipo_Encaminhamento')
                             }                            
                         ]
