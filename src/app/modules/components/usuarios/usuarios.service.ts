@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CookieService } from 'ngx-cookie-service';
-import { User, Permission } from './usuarios.model';
+import { User, Permission, ChangePermission } from './usuarios.model';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,6 @@ export class UsuariosService {
 	   
 	changePassword(cp: ChangePassword): Observable<ChangePassword> {
 		let token = this.cookieService.get('_sisgertranspac-t')
-		console.log(token)
 		this.headers = new HttpHeaders({  
 			"x-access-token": String(token),
 			"Access-Control-Allow-Credentials": "true",
@@ -132,6 +131,19 @@ export class UsuariosService {
 		return this.httpCliente.get<Permission[]>(newUrl,{ headers: headers})
 	}	
 	
-	//changePermission 
+	change_user_permission(cp: ChangePermission): Observable<ChangePermission> {
+		let token = this.cookieService.get('_sisgertranspac-t')
+		this.headers = new HttpHeaders({  
+			"x-access-token": String(token),
+			"Access-Control-Allow-Credentials": "true",
+			"Access-Control-Allow-Origin": "*",
+			"Access-Control-Allow-Methods": "POST",
+			"Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept",
+			"Content-Type" : "application/json",
+			"Accept" : "application/json"
+		} ) 		
+		const newUrl = `${this.baseUrl}/change_user_permission` 
+		return this.httpCliente.post<ChangePermission>(newUrl, cp, { headers: this.headers})
+	}	
 
 }

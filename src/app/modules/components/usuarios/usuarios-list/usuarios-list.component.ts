@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { User, ChangePassword, Permission} from './../usuarios.model';
+import { User, ChangePassword, Permission, ChangePermission} from './../usuarios.model';
 import { UsuariosService } from "./../usuarios.service";
 import { SortEvent } from 'primeng/api';
 import { Router } from '@angular/router';
 import { LoginService } from './../../auth/login.service';
 import { MessageService} from 'primeng/api';
-import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
     selector: 'app-usuarios-list',
@@ -15,7 +14,6 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 
 export class UsuariosListComponent implements OnInit {
-    formGroup!: FormGroup;
 
     users: User[];
     permissoes: Permission[];
@@ -23,6 +21,7 @@ export class UsuariosListComponent implements OnInit {
     
     // Permissões do usuário
     form_permission: boolean = false;
+    iconPermissionId: number = 0;
 
     // Alteração de senha do usuário
     cp: ChangePassword;
@@ -57,18 +56,45 @@ export class UsuariosListComponent implements OnInit {
         }   
     }
 
-    getIcon(i: number){
+    getIcon(i: number){        
+
         let icone: string = 'pi pi-ban';
-        if (this.userPermission[i] == true){
-            icone = 'pi pi-check';
+        
+        if (i == this.iconPermissionId) {
+            icone = 'pi pi-spin pi-spinner';
+        }
+        else {
+            if (this.userPermission[i] == true) {
+                icone = 'pi pi-check';
+            }
         }
         return icone
     }
 
     changePermission(i: number){
-        console.log(i);
+        let cp:ChangePermission
+        cp = {
+            permissao_id: i,
+            user_id: this.idUsuarioAlteracao
+        } 
+        this.iconPermissionId = i;
         this.userPermission[i] = !this.userPermission[i];       
-        console.log(this.userPermission);
+        
+        this.usuariosService.change_user_permission(cp).subscribe({
+            next: () => {
+                this.messageService.add({key: 'tst', severity: 'success', summary: 'SUCESSO', detail: 'Permissão alterada com sucesso!' });                                              
+            },
+            complete: () => {this.iconPermissionId = 0;},
+            error: (e) => { 
+                if (e.error['message err'] !== undefined) {
+                    this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail: e.error['message err'] });
+                } else {
+                    this.messageService.add({key: 'tst', severity: 'error', summary: 'ATENÇÃO', detail: 'Não foi possível executar a ação.' });
+                }  
+                this.iconPermissionId = 0;            
+            }	
+        })
+        
     }
 
     showChangePermissions(user_id: number, nome: string, sobrenome: string ) {

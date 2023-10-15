@@ -22,3 +22,8 @@ export interface Permission {
     modulo: string,
     icon: string
 }
+
+export interface ChangePermission {
+    permissao_id: number,
+    user_id: number
+}
