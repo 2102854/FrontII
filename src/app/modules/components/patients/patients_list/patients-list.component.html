@@ -22,9 +22,10 @@
                 <td>{{ paciente.tel_1 }}</td>
                 <td>{{ paciente.hygia }}</td>
                 <td>
-                    <a routerLink="/app/pacientes/update/{{paciente.paciente_id}}">
-                        <i class="bi bi-pencil-square"></i>          
-                    </a>  
+                    <!--a routerLink="/app/pacientes/update/{{paciente.paciente_id}}"-->
+                    <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text" (click)="update(paciente.paciente_id)" [disabled]="!canModify"></p-button>                         
+                        <!--i class="bi bi-pencil-square"></i-->          
+                    <!--/a-->  
                 </td>
             </tr>
         </ng-template>

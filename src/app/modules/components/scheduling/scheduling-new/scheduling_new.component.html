@@ -1,0 +1,153 @@
+<div class="grid">
+    <div class="col-12 md:col-12">
+		<div class="card" style="padding-bottom: 3px; padding-top: 25px;">
+			<div class="py-0 p-fluid p-formgrid grid">
+				<div class="field col-12 md:col-6">
+					<h5 class="my-0">Agendamento de Pacientes</h5>
+					<p-toast key="tst" [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+					<span>Registra um novo registro de transporte de pacientes no sistema</span>
+					<p-breadcrumb class="max-w-full" id="breadcrumb" [model]="items" [home]="home" [style]="{border: 'none'}"></p-breadcrumb>
+				</div>
+				<div class="field col-12 md:col-6">
+					<div class="flex flex-wrap  justify-content-end">				
+						<p-button pRipple label="Voltar" styleClass="p-button-outlined p-button-secondary" name="voltar" id="voltar" (click)="cancel()"></p-button>
+					</div>
+				</div>		
+			</div>
+		</div>  
+		<div class="card">
+			<h5 class="pb-3">Dados do Paciente</h5>	
+			<form>	
+				<div class="p-fluid p-formgrid grid">
+					<div class="field col-12 md:col-6">                			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="patients" [(ngModel)]="selectedPatients" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Paciente" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedPatients">                                    
+                                    <div>{{ selectedPatients.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-patients pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ patients.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Paciente</label>
+                        </span>                                      
+                    </div>
+					<div class="field col-12 md:col-6">                			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="hospital" [(ngModel)]="selectedHospital" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Hospital" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedHospital">                                    
+                                    <div>{{ selectedHospital.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-hospital pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ hospital.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Hospital</label>
+                        </span>                                      
+                    </div>                    
+					<div class="field col-12 md:col-6">                    			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="tipo_Encaminhamento" [(ngModel)]="selectedTipoEncaminhamento" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Tipo de Encaminhamento" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedTipoEncaminhamento">                                    
+                                    <div>{{ selectedTipoEncaminhamento.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-tipo_Encaminhamento pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ tipo_Encaminhamento.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Tipo de Encaminhamento</label>
+                        </span>   
+					</div>	
+					<div class="field col-12 md:col-6">                    			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="tipo_Doenca" [(ngModel)]="selectedTipoDoenca" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Tipo de Doença" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedTipoDoenca">                                    
+                                    <div>{{ selectedTipoDoenca.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-tipo_Doenca pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ tipo_Doenca.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Tipo de Doença</label>
+                        </span>   
+					</div>
+					<div class="field col-12 md:col-6">                    			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="tipo_Remocao" [(ngModel)]="selectedTipoRemocao" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Tipo de Remoção" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedTipoRemocao">                                    
+                                    <div>{{ selectedTipoRemocao.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-tipo_Remocao pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ tipo_Remocao.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Tipo de Remoção</label>
+                        </span>   
+					</div>                    
+                    <div class="field col-12 md:col-6">
+                        <span class="p-float-label">
+                            <p-dropdown [options]="motorista" [(ngModel)]="selectedMotorista" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Motorista" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedMotorista">                                    
+                                    <div>{{ selectedMotorista.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-motorista pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ motorista.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Motorista</label>
+                        </span>                                      
+                    </div>
+                    
+                    <div class="field col-12 md:col-6">                			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="veiculos" [(ngModel)]="selectedVeiculos" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Veiculos" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedVeiculos">                                    
+                                    <div>{{ selectedVeiculos.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-veiculos pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ veiculos.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Veiculos</label>
+                        </span>                                      
+                    </div>  
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<input type="text" id="responsavel_pac" pInputText [(ngModel)]="scheduling.responsavel_pac" name="responsavel_pac" autocomplete="off">
+							<label for="inputtext">Responsável pelo Paciente</label>
+						</span>
+					</div>
+
+				</div>
+			</form>			
+		</div>
+    </div>
+</div>

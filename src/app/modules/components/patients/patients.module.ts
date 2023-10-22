@@ -3,10 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { PatientsComponent } from './patients/patients.component';
 import { PatientsListComponent } from './patients_list/patients-list.component';
-/*
-import { PaisesNewComponent} from './paises_new/paises_new.component';
-import { PaisesUpdateComponent } from './paises_update/paises_update.component';
-*/
+import { PatientsNewComponent} from './patients_new/patients_new.component';
+import { PatientsUpdateComponent } from './patients_update/patients_update.component';
 import { PatientsRoutingModule } from './patients-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -32,8 +30,8 @@ import { ToastModule } from 'primeng/toast';
   declarations: [
     PatientsComponent,
     PatientsListComponent,
-    //PaisesNewComponent,
-    //PaisesUpdateComponent
+    PatientsNewComponent,
+    PatientsUpdateComponent
   ],
   imports: [
     CommonModule,

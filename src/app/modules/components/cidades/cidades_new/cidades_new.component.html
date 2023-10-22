@@ -1,0 +1,100 @@
+<div class="grid">
+    <div class="col-12 md:col-12">
+		<div class="card" style="padding-bottom: 3px; padding-top: 25px;">
+			<div class="py-0 p-fluid p-formgrid grid">
+				<div class="field col-12 md:col-6">
+					<h5 class="my-0">Cadastro de Cidade</h5>
+					<p-toast key="tst" [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+					<span>Insere uma nova Cidade no Sistema</span>
+					<p-breadcrumb class="max-w-full" id="breadcrumb" [model]="items" [home]="home" [style]="{border: 'none'}"></p-breadcrumb>
+				</div>
+				<div class="field col-12 md:col-6">
+					<div class="flex flex-wrap  justify-content-end">				
+						<p-button pRipple label="Voltar" styleClass="p-button-outlined p-button-secondary" name="voltar" id="voltar" (click)="cancel()"></p-button>
+					</div>
+				</div>		
+			</div>
+		</div>          
+		<div class="card">
+			<h5 class="pb-3">Dados da Cidade</h5>	
+			<form> 
+                	
+				<div class="p-fluid p-formgrid grid">
+                    
+					<div class="field col-12 md:col-6">
+						<div class="p-inputgroup">
+							<span class="p-inputgroup-addon">
+								<i class="bi bi-buildings"></i>
+							</span>
+							<span class="p-float-label">
+								<input type="text" inputId="nome" pInputText [(ngModel)]="cidade.nome" name="cidade_nome" autocomplete="off"> 
+								<label for="nome">Nome da Cidade</label>
+							</span>
+						</div>
+					</div>
+                    <div class="field col-12 md:col-6">                    			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="paises" [(ngModel)]="selectedPais" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Pais" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedPais">                                    
+                                    <div>{{ selectedPais.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-pais pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ pais.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Pais</label>
+                        </span>                                        
+                    </div> 
+
+                    
+					<div class="field col-12 md:col-6">                    			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="estados" [(ngModel)]="selectedEstado" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Estado" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedEstadps">                                    
+                                    <div>{{ selectedEstados.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-pais pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ estado.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Estado</label>
+                        </span>                                        
+                    </div>       
+
+                    
+					<div class="field col-12 md:col-3">
+						<span class="p-float-label">
+							<input type="text" id="distancia_km" pInputText [(ngModel)]="cidade.distancia_km" name="cidade_distancia_km" autocomplete="off">
+							<label for="inputtext">Distancia em KM</label>
+						</span>
+					</div>
+
+                    <div class="field col-12 md:col-3">
+						<span class="p-float-label">
+							<input type="text" id="valor_pedagio" pInputText [(ngModel)]="cidade.valor_pedagio" name="cidade_valor_pedagio" autocomplete="off">
+							<label for="inputtext">Valor do Pedágio</label>
+						</span>
+					</div>
+                    
+				</div>
+				 
+                <div class="p-fluid p-formgrid grid justify-content-end">
+					<div class="field col-12 md:col-1 ">
+						<div class="flex flex-wrap  ">
+							<button pButton pRipple label="Salvar" name="salvar" id="salvar" class="p-button-success" (click)="create()"></button>
+						</div>
+					</div>				
+				</div>
+                
+			</form>			
+		</div>       
+    </div>
+</div>

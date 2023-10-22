@@ -3,6 +3,8 @@ import { CidadeFull } from './../cidades.model';
 import { CidadesService } from "./../cidades.service";
 import { MessageService } from 'primeng/api';
 import { SortEvent } from 'primeng/api';
+import { LoginService } from './../../auth/login.service';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-cidades-list',
@@ -13,9 +15,15 @@ import { SortEvent } from 'primeng/api';
 
 export class CidadesListComponent implements OnInit {
 
-    cidadesFull: CidadeFull[];  
+    cidadesFull: CidadeFull[]; 
+    
+    // Permissões do módulo - Verifica se o usuário pode alterar o registro
+    canModify:boolean =   this.loginService.havePermission('Pode_Atualizar_Cidades'); 
 
-    constructor(private cidadesService: CidadesService, private messageService: MessageService ) { 
+    constructor(
+        private router: Router, private cidadesService: CidadesService, 
+        private loginService: LoginService, private messageService: MessageService 
+    ) { 
         
         setTimeout(() => {
             this.cidadesService.read().subscribe({
@@ -30,6 +38,13 @@ export class CidadesListComponent implements OnInit {
     }
 
     ngOnInit(): void {} 
+
+    update(id: number): void {
+        // Permissões do módulo - Se o usuário tem permissão, redireciona para a página de alteração
+        if (this.canModify){
+		    this.router.navigate([`/app/cidades/update/${id}`]);            
+        }        
+    }     
     
     customSort(event: SortEvent) {
         event.data.sort((data1, data2) => {

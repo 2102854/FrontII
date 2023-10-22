@@ -1,0 +1,120 @@
+<div class="grid">
+    <div class="col-12 md:col-12">
+		<div class="card" style="padding-bottom: 3px; padding-top: 25px;">
+			<div class="py-0 p-fluid p-formgrid grid">
+				<div class="field col-12 md:col-6">
+					<h5 class="my-0">Cadastro de Pacientes</h5>
+					<p-toast key="tst" [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+					<span>Insere um novo Pacientes no Sistema</span>
+					<p-breadcrumb class="max-w-full" id="breadcrumb" [model]="items" [home]="home" [style]="{border: 'none'}"></p-breadcrumb>
+				</div>
+				<div class="field col-12 md:col-6">
+					<div class="flex flex-wrap  justify-content-end">				
+						<p-button pRipple label="Voltar" styleClass="p-button-outlined p-button-secondary" name="voltar" id="voltar" (click)="cancel()"></p-button>
+					</div>
+				</div>		
+			</div>
+		</div>  
+		<div class="card">
+			<h5 class="pb-3">Dados do Paciente</h5>	
+			<form>	
+				<div class="p-fluid p-formgrid grid">
+					<div class="field col-12 md:col-6">
+						<div class="p-inputgroup">
+							<span class="p-inputgroup-addon">
+								<i class="pi pi-fw pi-id-card"></i>
+							</span>
+							<span class="p-float-label">
+								<input type="text" id="nome" pInputText [(ngModel)]="paciente.nome" name="paciente_nome" autocomplete="off"> 
+								<label for="nome">Nome do Paciente</label>
+							</span>
+						</div>
+					</div>
+
+					<div class="field col-12 md:col-6">                    			
+                        <span class="p-float-label">
+                            <p-dropdown [options]="cidade" [(ngModel)]="selectedCidade" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Cidade" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <ng-template pTemplate="selectedItem">
+                                <div class="flex align-items-center gap-2" *ngIf="selectedCidade">                                    
+                                    <div>{{ selectedCidade.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            <ng-template let-cidade pTemplate="item">
+                                <div class="flex align-items-center gap-2">                                
+                                    <div>{{ cidade.nome }}</div>
+                                </div>
+                            </ng-template>                            
+                            
+                            <label for="float-label">Cidade</label>
+                        </span>                                        
+                    </div>  					
+
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<!--<input type="text" id="data_nasc" pInputText [(ngModel)]="paciente.data_nasc" name="paciente_data_nasc" autocomplete="off">-->
+							<p-calendar [(ngModel)]="paciente.data_nasc" dateFormat="dd/mm/yy" [showIcon]="true" [showButtonBar]="true" [ngModelOptions]="{standalone: true}"></p-calendar>
+							<label for="inputtext">Data de Nascimento do Paciente</label>
+						</span>
+					</div>
+
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<!--<input type="text" id="tel_1" pInputText [(ngModel)]="paciente.tel_1" name="paciente_tel_1" >-->
+							<p-inputMask id="tel_1" name="paciente_tel_1" mask="99-9?9999-9999" [(ngModel)]="paciente.tel_1" autocomplete="off" autoClear></p-inputMask>
+							<label for="inputtext">Telefone 1 do Paciente</label>
+						</span>
+					</div>
+					
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<input type="text" id="tel_2" pInputText [(ngModel)]="paciente.tel_2" name="paciente_tel_2" autocomplete="off">
+							<label for="inputtext">Telefone 2 do Paciente</label>
+						</span>
+					</div>
+
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<input type="text" id="logradouro" pInputText [(ngModel)]="paciente.logradouro" name="paciente_logradouro" autocomplete="off">
+							<label for="inputtext">Logradouro do Paciente</label>
+						</span>
+					</div>
+
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<input type="text" id="numero" pInputText [(ngModel)]="paciente.numero" name="paciente_numero" autocomplete="off">
+							<label for="inputtext">Número do logradouro do Paciente</label>
+						</span>
+					</div>
+
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<input type="text" id="complemento" pInputText [(ngModel)]="paciente.complemento" name="paciente_complemento" autocomplete="off">
+							<label for="inputtext">Complemento do logradouro do Paciente</label>
+						</span>
+					</div>
+					
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<input type="text" id="cep" pInputText [(ngModel)]="paciente.cep" name="paciente_cep" autocomplete="off">
+							<label for="inputtext">CEP do Paciente</label>
+						</span>
+					</div>
+
+					<div class="field col-12 md:col-6">
+						<span class="p-float-label">
+							<input type="text" id="hygia" pInputText [(ngModel)]="paciente.hygia" name="paciente_hygia" autocomplete="off">
+							<label for="inputtext">Hygia do Paciente</label>
+						</span>
+					</div>										
+				</div>
+				<div class="p-fluid p-formgrid grid justify-content-end">
+					<div class="field col-12 md:col-1 ">
+						<div class="flex flex-wrap  ">
+							<button pButton pRipple label="Salvar" name="salvar" id="salvar" class="p-button-success" (click)="create()"></button>
+						</div>
+					</div>				
+				</div>
+			</form>			
+		</div>
+    </div>
+</div>

@@ -22,6 +22,7 @@ import { LoginComponent } from './modules/components/auth/login/login.component'
                     { path: 'tipos_remocao', loadChildren: () => import('./modules/components/tipo_remocao/tipo_remocao.module').then(m => m.Tipos_RemocaoModule) },
                     { path: 'usuarios', loadChildren: () => import('./modules/components/usuarios/usuarios.module').then(m => m.UsuariosModule) },
                     { path: 'tipo_encaminhamento', loadChildren: () => import('./modules/components/tipo_encaminhamento/tipo_encaminhamento.module').then(m => m.Tipo_EncamimhamentoModule) },
+                    { path: 'hospitais', loadChildren: () => import('./modules/components/hospitals/hospitals.module').then(m => m.HospitalsModule) },
                 ]
             },
             { path: '', component: LoginComponent },

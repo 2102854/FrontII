@@ -3,10 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { SchedulingComponent } from './scheduling/scheduling.component';
 import { SchedulingListComponent } from './scheduling-list/scheduling-list.component';
-/*
-import { PaisesNewComponent} from './paises_new/paises_new.component';
-import { PaisesUpdateComponent } from './paises_update/paises_update.component';
-*/
+import { SchedulingNewComponent} from './scheduling-new/scheduling_new.component';
 import { SchedulingRoutingModule } from './scheduling-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -32,7 +29,7 @@ import { ToastModule } from 'primeng/toast';
   declarations: [
     SchedulingComponent,
     SchedulingListComponent,
-    //PaisesNewComponent,
+    SchedulingNewComponent,
     //PaisesUpdateComponent
   ],
   imports: [

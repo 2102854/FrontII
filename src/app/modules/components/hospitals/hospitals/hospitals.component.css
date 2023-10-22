@@ -1,0 +1,9 @@
+
+.breadcrumb {
+    ::ng-deep {
+    
+        border: none !important;
+        padding-bottom: 0px !important;
+        padding-left: 0px !important;
+    } 
+}

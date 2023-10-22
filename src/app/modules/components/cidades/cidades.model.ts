@@ -2,6 +2,7 @@ export interface Cidade {
     cidade_id?: number,
     estado_id: number,
     pais_id: number,
+    nome: string,
     distancia_km: number, 
     valor_pedagio: number
 }
@@ -13,5 +14,6 @@ export interface CidadeFull {
     estado_nome: string,
     pais_nome: string,
     distancia_km: number, 
-    valor_pedagio: number
+    valor_pedagio: number,
+    nome: string,
 }

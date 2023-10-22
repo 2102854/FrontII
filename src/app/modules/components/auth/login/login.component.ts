@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
             const ipdata = new IPData(environment.ipData, cacheConfig);
             ipdata.lookup()
             .then(function(info) {
-                let geolocation = `ip:${info.ip}|city:${info.city}|region_code:${info.region_code}|country_name:${info.country_name}|country_code:${info.country_code}|latitude:${info.latitude}|longitude:${info.longitude}|flag:${info.flag}|carrier_name:${info.asn.name}|carriet_type:${info.asn.type}|time_zone:${info.time_zone.name}` 
+                let geolocation = `ip:${info.ip}|city:${info.city}|region_code:${info.region_code}|country_name:${info.country_name}|country_code:${info.country_code}|latitude:${info.latitude}|longitude:${info.longitude}|flag:${info.flag}|carrier_name:${info.asn.name}|carriet_type:${info.asn.type}|time_zone:${info.time_zone.name}`                 
                 let result =CryptoJS.AES.encrypt(geolocation, secretKey).toString();
                 cookieService.set('_sisgertranspac-g', result, { expires: 5, path: '/', sameSite:'Strict' });
                 if(info.city === 'Ribeirão Preto'){

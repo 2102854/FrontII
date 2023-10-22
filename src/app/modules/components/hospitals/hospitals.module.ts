@@ -1,10 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CidadesComponent } from './cidades/cidades.component';
-import { CidadesListComponent } from './cidades-list/cidades-list.component';
-import { CidadesNewComponent} from './cidades_new/cidades_new.component';
-import { CidadesUpdateComponent } from './cidades_update/cidades_update.component';
-import { CidadesRoutingModule } from './cidades-routing.module';
+import { HospitalsComponent } from './hospitals/hospitals.component';
+import { HospitalsListComponent } from './hospitals-list/hospitals-list.component';
+import { HospitalsRoutingModule } from './hospitals-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -27,14 +25,14 @@ import { ToastModule } from 'primeng/toast';
 
 @NgModule({
   declarations: [
-    CidadesComponent,
-    CidadesListComponent,
-    CidadesNewComponent,
-    CidadesUpdateComponent
+    HospitalsComponent,
+    HospitalsListComponent,
+   // PaisesNewComponent,
+   // PaisesUpdateComponent
   ],
   imports: [
     CommonModule,
-    CidadesRoutingModule,
+    HospitalsRoutingModule,
     TableModule,
     ButtonModule,
 		RippleModule,
@@ -56,4 +54,4 @@ import { ToastModule } from 'primeng/toast';
     ToastModule
   ]
 })
-export class CidadesModule { }
+export class HospitalsModule { }

@@ -35,7 +35,7 @@ export class PatientsComponent {
 	}
 	
 	novoRegistro(): void {
-		this.router.navigate(['/app/patient/create']);
+		this.router.navigate(['/app/pacientes/create']);
 	}
 
     cancel(): void {
