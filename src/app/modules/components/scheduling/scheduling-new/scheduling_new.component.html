@@ -53,7 +53,7 @@
                             <label for="float-label">Hospital</label>
                         </span>                                      
                     </div>                    
-					<div class="field col-12 md:col-6">                    			
+					<div class="field col-12 md:col-3">                    			
                         <span class="p-float-label">
                             <p-dropdown [options]="tipo_Encaminhamento" [(ngModel)]="selectedTipoEncaminhamento" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Tipo de Encaminhamento" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             <ng-template pTemplate="selectedItem">
@@ -70,7 +70,7 @@
                             <label for="float-label">Tipo de Encaminhamento</label>
                         </span>   
 					</div>	
-					<div class="field col-12 md:col-6">                    			
+					<div class="field col-12 md:col-3">                    			
                         <span class="p-float-label">
                             <p-dropdown [options]="tipo_Doenca" [(ngModel)]="selectedTipoDoenca" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Tipo de Doença" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             <ng-template pTemplate="selectedItem">
@@ -87,7 +87,7 @@
                             <label for="float-label">Tipo de Doença</label>
                         </span>   
 					</div>
-					<div class="field col-12 md:col-6">                    			
+					<div class="field col-12 md:col-3">                    			
                         <span class="p-float-label">
                             <p-dropdown [options]="tipo_Remocao" [(ngModel)]="selectedTipoRemocao" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Tipo de Remoção" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             <ng-template pTemplate="selectedItem">
@@ -103,8 +103,14 @@
                             
                             <label for="float-label">Tipo de Remoção</label>
                         </span>   
-					</div>                    
-                    <div class="field col-12 md:col-6">
+					</div>   
+					<div class="field col-12 md:col-3">
+						<span class="p-float-label">
+							<input type="text" id="responsavel_pac" pInputText [(ngModel)]="scheduling.responsavel_pac" name="responsavel_pac" autocomplete="off">
+							<label for="inputtext">Responsável pelo Paciente</label>
+						</span>
+					</div>                                     
+                    <div class="field col-12 md:col-3">
                         <span class="p-float-label">
                             <p-dropdown [options]="motorista" [(ngModel)]="selectedMotorista" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Motorista" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             <ng-template pTemplate="selectedItem">
@@ -122,30 +128,66 @@
                         </span>                                      
                     </div>
                     
-                    <div class="field col-12 md:col-6">                			
+                    <div class="field col-12 md:col-3">                			
                         <span class="p-float-label">
-                            <p-dropdown [options]="veiculos" [(ngModel)]="selectedVeiculos" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Veiculos" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <p-dropdown [options]="veiculos" [(ngModel)]="selectedVeiculos" optionLabel="modelo" [filter]="true" filterBy="modelo" [showClear]="true" placeholder="Veiculos" [ngModelOptions]="{standalone: true}"></p-dropdown>
                             <ng-template pTemplate="selectedItem">
                                 <div class="flex align-items-center gap-2" *ngIf="selectedVeiculos">                                    
-                                    <div>{{ selectedVeiculos.nome }}</div>
+                                    <div>{{ selectedVeiculos.modelo }}</div>
                                 </div>
                             </ng-template>                            
                             <ng-template let-veiculos pTemplate="item">
                                 <div class="flex align-items-center gap-2">                                
-                                    <div>{{ veiculos.nome }}</div>
+                                    <div>{{ veiculos.modelo }}</div>
                                 </div>
                             </ng-template>                            
                             
                             <label for="float-label">Veiculos</label>
                         </span>                                      
                     </div>  
+					<div class="field col-12 md:col-3">
+						<span class="p-float-label">							
+							<p-calendar [(ngModel)]="scheduling.data_remocao" dateFormat="dd/mm/yy" [showTime]="true" [showIcon]="true" [showButtonBar]="true" [ngModelOptions]="{standalone: true}"></p-calendar>
+							<label for="inputtext">Data de Remoção</label>
+						</span>
+					</div> 
+					<div class="field col-12 md:col-3">
+						<span class="p-float-label">							
+							<p-calendar [(ngModel)]="scheduling.saida_prevista" dateFormat="dd/mm/yy" [showTime]="true" [showIcon]="true" [showButtonBar]="true" [ngModelOptions]="{standalone: true}"></p-calendar>
+							<label for="inputtext">Saída Prevista</label>
+						</span>
+					</div> 
+					<div class="field col-12 md:col-3">
+						<span class="p-float-label">							
+                            <p-inputNumber [(ngModel)]="ifd" mode="currency" inputId="custo_ifd" currency="BRL" locale="pt-BR" [ngModelOptions]="{standalone: true}"> </p-inputNumber>
+							<label for="inputtext">Custo IFD</label>
+						</span>
+					</div>     
+					<div class="field col-12 md:col-3">
+						<span class="p-float-label">							
+                            <p-inputNumber [(ngModel)]="estadia" mode="currency" inputId="custo_estadia" currency="BRL" locale="pt-BR" [ngModelOptions]="{standalone: true}"> </p-inputNumber>
+							<label for="inputtext">Custo Estadia</label>
+						</span>
+					</div>  
 					<div class="field col-12 md:col-6">
 						<span class="p-float-label">
-							<input type="text" id="responsavel_pac" pInputText [(ngModel)]="scheduling.responsavel_pac" name="responsavel_pac" autocomplete="off">
-							<label for="inputtext">Responsável pelo Paciente</label>
+							<input type="text" id="estado_geral_paciente" pInputText [(ngModel)]="scheduling.estado_geral_paciente" name="estado_geral_paciente" autocomplete="off">
+							<label for="inputtext">Estado geral do paciente</label>
 						</span>
 					</div>
-
+					<div class="field col-12 md:col-12">
+						<span class="p-float-label">
+							<textarea rows="3" pInputTextarea [(ngModel)]="observacao" [ngModelOptions]="{standalone: true}"></textarea>
+							<label for="inputtext">Observações</label>
+						</span>
+					</div>                                                                                                                                       
+				</div>
+                <div class="p-fluid p-formgrid grid justify-content-end">
+					<div class="field col-12 md:col-1 ">
+						<div class="flex flex-wrap  ">
+							<button pButton pRipple label="Salvar" name="salvar" id="salvar" class="p-button-success" (click)="create()"></button>
+						</div>
+					</div>				
 				</div>
 			</form>			
 		</div>

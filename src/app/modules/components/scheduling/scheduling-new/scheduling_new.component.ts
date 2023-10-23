@@ -54,7 +54,11 @@ export class SchedulingNewComponent implements OnInit {
     veiculos: Veiculos[] = []; 
     selectedVeiculos: Veiculos | undefined;
 
-    formGroup: FormGroup | undefined;    
+    observacao!: string;
+    ifd: number = 0;
+    estadia: number = 0;
+
+    formGroup: FormGroup | undefined;
     
     //Breadcrumb
     items: MenuItem[] | undefined;
@@ -80,13 +84,9 @@ export class SchedulingNewComponent implements OnInit {
     }
         
     constructor( 
-        private config: PrimeNGConfig, private cidadesService: CidadesService,private loginService: LoginService, 
-        private schedulingService: SchedulingService, private router: Router, private messageService: MessageService,
-        private tipo_EncaminhamentoService: Tipo_EncaminhamentoService, private tipo_DoencaService: Tipo_DoencaService,
-        private tipo_RemocaoService: Tipo_RemocaoService, private patientsService:PatientsService,
-        private hospitalsService: HospitalsService, private MotoristasService: MotoristasService,
-        private veiculosService: VeiculosService
-        ) 
+        private config: PrimeNGConfig, private loginService: LoginService, 
+        private schedulingService: SchedulingService, private router: Router, private messageService: MessageService
+    ) 
     {
         setTimeout(() => {
             this.loginService.validateSession()
@@ -107,48 +107,24 @@ export class SchedulingNewComponent implements OnInit {
             dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado']
         });      
 
-        this.tipo_EncaminhamentoService.read().subscribe (tipo_encaminhamento => {
-            this.tipo_Encaminhamento = tipo_encaminhamento
+        this.schedulingService.get_data_form().subscribe(data_form => {
+            this.hospital = data_form['hospital'];
+            this.patients = data_form['paciente'];
+            this.motorista = data_form['motorista'];
+            this.tipo_Doenca = data_form['tipoDoenca'];
+            this.tipo_Encaminhamento = data_form['tipo_encaminhamento'];
+            this.tipo_Remocao = data_form['tipo_remocao'];
+            this.veiculos = data_form['veiculo'];            
         });
 
-        this.tipo_DoencaService.read().subscribe (tipo_doenca => {
-            this.tipo_Doenca = tipo_doenca
-        }); 
-        
-        setTimeout(() => {
-            this.tipo_RemocaoService.read().subscribe (tipo_Remocao => {
-                this.tipo_Remocao = tipo_Remocao
-            });
-        }, 200)
-        
-        setTimeout(() => {
-            this.patientsService.read().subscribe(patients => {
-                this.patients = patients   
-            });
-        }, 300)
-
-        setTimeout(() => {
-            this.hospitalsService.read().subscribe(hospital => {
-                this.hospital = hospital     
-            });
-        }, 400)
-
-        setTimeout(() => {
-            this.veiculosService.read().subscribe(veiculos => {
-                this.veiculos = veiculos   
-            });
-        }, 500)
-
-        setTimeout(() => {
-            this.MotoristasService.read().subscribe(motorista => {
-                this.motorista = motorista   
-            });
-        }, 500)
-
-         
-
         this.formGroup = new FormGroup({
-            selectedCidade: new FormControl<object | null>(null)
+            selectedVeiculos: new FormControl<object | null>(null),
+            selectedPatients: new FormControl<object | null>(null),
+            selectedHospital: new FormControl<object | null>(null),
+            selectedTipoEncaminhamento: new FormControl<object | null>(null),
+            selectedTipoDoenca: new FormControl<object | null>(null),
+            selectedTipoRemocao: new FormControl<object | null>(null),
+            selectedMotorista: new FormControl<object | null>(null)
         });
 
         // Componente Breadcrumb
@@ -157,25 +133,25 @@ export class SchedulingNewComponent implements OnInit {
     }
     
     create(): void {
-        /*
-        this.paciente.nome = this.paciente.nome.toUpperCase().trim();
-        this.paciente.cidade_id = this.selectedCidade.cidade_id;
-        this.paciente.data_nasc = this.paciente.data_nasc;
-        this.paciente.tel_1 = this.paciente.tel_1;
-        this.paciente.tel_2 = this.paciente.tel_2;
-        this.paciente.logradouro = this.paciente.logradouro.toUpperCase().trim();
-        this.paciente.numero = this.paciente.numero.toUpperCase().trim();
-        this.paciente.complemento = this.paciente.complemento.toUpperCase().trim();
-        this.paciente.cep = this.paciente.cep.toUpperCase().trim();
-        this.paciente.hygia = this.paciente.hygia.toUpperCase().trim();
-        this.paciente.data_cadastro = this.paciente.data_cadastro;
+        this.scheduling.paciente_id = Number(this.selectedPatients.paciente_id);
+        this.scheduling.tipo_encaminhamento_id = Number(this.selectedTipoEncaminhamento.tipo_encaminhamento_id);
+        this.scheduling.tipo_doenca_id = Number(this.selectedTipoDoenca.tipo_doenca_id);
+        this.scheduling.tipo_remocao_id = Number(this.selectedTipoRemocao.tipo_remocao_id);
+        this.scheduling.hospital_id = Number(this.selectedHospital.hospital_id);
+        this.scheduling.veiculo_id = Number(this.selectedVeiculos.veiculo_id);
+        this.scheduling.motorista_id = Number(this.selectedMotorista.motorista_id);
+        this.scheduling.responsavel_pac = this.scheduling.responsavel_pac.toUpperCase().trim();
+        this.scheduling.estado_geral_paciente = this.scheduling.estado_geral_paciente.toUpperCase().trim();
+        this.scheduling.observacao = this.observacao.toUpperCase();
+        this.scheduling.custo_ifd = this.ifd;
+        this.scheduling.custo_estadia = this.estadia;
 
-
-        this.patientsService.create(this.paciente).subscribe({
+        console.log(this.scheduling);
+        this.schedulingService.create(this.scheduling).subscribe({
             next: () => {
                 this.messageService.add({key: 'tst', severity: 'success', summary: 'SUCESSO', detail: 'Registro gravado com sucesso!' });
                 setTimeout(() => {
-                    this.router.navigate(['/app/pacientes'])
+                    this.router.navigate(['/app/agendamento'])
                 }, 2500)                                
             },
             complete: () => {},
@@ -188,7 +164,7 @@ export class SchedulingNewComponent implements OnInit {
                 
             }	
         })
-        */
+
     }
     
     cancel(): void {       

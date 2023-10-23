@@ -3,6 +3,8 @@ import { SchedulingFull } from './../scheduling.model';
 import { SchedulingService } from "./../scheduling.service";
 import { MessageService } from 'primeng/api';
 import { SortEvent } from 'primeng/api';
+import { Router } from '@angular/router';
+import { LoginService } from './../../auth/login.service';
 
 @Component({
     selector: 'app-scheduling-list',
@@ -15,8 +17,16 @@ export class SchedulingListComponent implements OnInit {
 
     schedulingFull: SchedulingFull[];  
 
-    constructor(private schedulingService: SchedulingService, private messageService: MessageService ) { 
-        
+    // Permissões do módulo - Verifica se o usuário pode alterar o registro
+    canModify:boolean =   this.loginService.havePermission('Pode_Atualizar_Pacientes');
+
+    constructor(
+        private router: Router, 
+        private loginService: LoginService,
+        private schedulingService: SchedulingService, 
+        private messageService: MessageService 
+    ) 
+    {         
         setTimeout(() => {
             this.schedulingService.read().subscribe({
                 next: (schedulingFull) => {
@@ -30,6 +40,13 @@ export class SchedulingListComponent implements OnInit {
     }
 
     ngOnInit(): void {} 
+
+    update(id: number): void {
+        // Permissões do módulo - Se o usuário tem permissão, redireciona para a página de alteração
+        if (this.canModify){
+		    this.router.navigate([`/app/agendamento/update/${id}`]);            
+        }        
+    }    
     
     customSort(event: SortEvent) {
         event.data.sort((data1, data2) => {

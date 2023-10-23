@@ -3,12 +3,12 @@
         <ng-template pTemplate="header">
             <tr>
                 <th style="width:5%"></th>
-                <th pSortableColumn="nome" style="width:30%">Nome<p-sortIcon field="code"></p-sortIcon></th>
+                <th pSortableColumn="nome" style="width:28%">Nome<p-sortIcon field="code"></p-sortIcon></th>
                 <th style="width:7%">Data Nasc.</th>
                 <th style="width:7%">Telefone</th>
                 <th style="width:7%">Hygia</th>
                 <th style="width:30%">Hospital</th>
-                <th style="width:10%">Data Remoção</th>
+                <th style="width:12%">Data Remoção</th>
                 <th style="width: 4%"></th>
             </tr>
         </ng-template>
@@ -24,17 +24,16 @@
                 <td>{{ scheduling.tel_1 }}</td>
                 <td>{{ scheduling.hygia }}</td>
                 <td>{{ scheduling.hospital }}</td>
-                <td>{{ scheduling.data_remocao | date :'dd/MM/yyyy'}}</td>                
+                <td>{{ scheduling.data_remocao | date :'dd/MM/yyyy hh:mm'}}</td>                
                 <td>
-                    <a routerLink="/app/agendamento/update/{{scheduling.agendamento_id}}">
-                        <i class="bi bi-pencil-square"></i>          
-                    </a>  
+                    <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text" (click)="update(scheduling.agendamento_id)" [disabled]="!canModify"></p-button> 
                 </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="rowexpansion" let-scheduling>
             <tr>
-                <td colspan="6">
+                <td colspan="12">
+
                     <div class="card text-bg-secondary mb-3" style="padding-bottom: 3px; padding-top: 3px;">
                         <div class="row g-0">
                           <div class="col-md-8">
@@ -45,34 +44,74 @@
                                         <div class="text-700 text-1xl font-bold mb-3 align-items-center">Detalhes do Agendamento</div>
                                     </li>
                                 </ul>   
-                                                        
-                                <p>
-                                    <span class="text-700 text-1xl font-bold mb-3">Tipo de doenca:</span>
-                                    <span style="padding-left: 5px;">{{ scheduling.tipo_doenca }}</span>
-                                </p>
-                                   
-                                <p>
-                                    <span class="text-700 text-1xl font-bold mb-3">Tipo de encaminhamento:</span>
-                                    <span style="padding-left: 5px;">{{ scheduling.tipo_encaminhamento }}</span>
-                                </p> 
-                                <!--                               
-                                <p>
-                                    <span class="text-700 text-1xl font-bold mb-3">Número:</span>
-                                    <span style="padding-left: 5px;">{{ scheduling.numero }}</span>
-                                </p>
-                                <p>
-                                    <span class="text-700 text-1xl font-bold mb-3">Complemento:</span>
-                                    <span style="padding-left: 5px;">{{ scheduling.complemento }}</span>
-                                </p>     
-                                <p>
-                                    <span class="text-700 text-1xl font-bold mb-3">CEP:</span>
-                                    <span style="padding-left: 5px;">{{ scheduling.cep }}</span>
-                                </p>
-                                <p>
-                                    <span class="text-700 text-1xl font-bold mb-3">Data de Cadastro:</span>
-                                    <span style="padding-left: 5px; padding-bottom: 3px;">{{ scheduling.data_cadastro | date :'dd/MM/yyyy' }}</span>
-                                </p> 
-                            -->  
+
+                                <div class="p-fluid p-formgrid grid">
+                                    <div class="field col-12 md:col-4">
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Tipo de doença:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.tipo_doenca }}</span>
+                                        </p>                                           
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Tipo de encaminhamento:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.tipo_encaminhamento }}</span>
+                                        </p>  
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Tipo de remoção:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.tipo_remocao }}</span>
+                                        </p>                                                                                           
+                                    </div>
+                                    <div class="field col-12 md:col-4">  
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Motorista:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.motorista }}</span>
+                                        </p>                                                                                  
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Veículo:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.veiculo_modelo }}</span>
+                                        </p> 
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Placa do Veículo:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.veiculo_placa }}</span>
+                                        </p>                                           
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Capacidade Veículo:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.veiculo_capacidade }}</span>
+                                        </p> 
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Consumo Veículo:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.veiculo_media_consumo }} km/l</span>
+                                        </p>                                           
+                                                                                                                                     
+                                    </div> 
+                                    <div class="field col-12 md:col-4">   
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Saída Prevista:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.saida_prevista | date :'dd/MM/yyyy hh:mm' }}</span>
+                                        </p>                                                                                 
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Responsável PAC:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.responsavel_pac }}</span>
+                                        </p> 
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Estado Geral:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.estado_geral_paciente }}</span>
+                                        </p> 
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Custo IFD:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.custo_ifd | currency: 'BRL'}}</span>
+                                        </p>   
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Custo Estadia:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.custo_estadia | currency: 'BRL'}}</span>
+                                        </p>                                                                                                                                                                                                                                                                   
+                                    </div>                                     
+                                    <div class="field col-12 md:col-12">
+                                        <p>
+                                            <span class="text-700 text-1xl font-bold mb-3">Observação:</span>
+                                            <span style="padding-left: 5px;">{{ scheduling.observacao }}</span>
+                                        </p>    
+                                    </div>                                                                        
+                                </div>                                
                             </div>
                           </div> 
                         </div>

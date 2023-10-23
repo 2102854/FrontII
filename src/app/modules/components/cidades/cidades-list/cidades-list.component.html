@@ -16,7 +16,7 @@
                 <td>{{ cidade.pais_nome }}</td>
                 <td>{{ cidade.estado_nome }}</td>
                 <td>{{ cidade.distancia_km + ' km' }}</td>
-                <td>{{ 'R$ ' + cidade.valor_pedagio + ',00'}}</td>
+                <td>{{ cidade.valor_pedagio | currency: 'BRL'}}</td>
                 <td>
                     <p-button icon="pi pi-pencil" styleClass="p-button-rounded p-button-text" (click)="update(cidade.cidade_id)" [disabled]="!canModify"></p-button>  
                 </td>                

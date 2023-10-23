@@ -1,3 +1,21 @@
+import { Patients } from "../patients/patients.model";
+import { Veiculos } from "../veiculos/veiculos.model";
+import { Motorista } from "../motoristas/motoristas.model";
+import { Hospital } from "../hospitals/hospitals.model";
+import { Tipo_Doenca } from "../tipo_doenca/tipo_doenca.model";
+import { Tipo_Remocao } from "../tipo_remocao/tipo_remocao.model";
+import { Tipo_Encaminhamento } from "../tipo_encaminhamento/tipo_encaminhamento.model";
+
+export interface data_form {
+    patients: Patients,
+    veiculos: Veiculos,
+    motorista: Motorista,
+    hospital: Hospital,
+    tipo_Doenca: Tipo_Doenca,
+    tipo_Remocao: Tipo_Remocao,
+    tipo_Encaminhamento: Tipo_Encaminhamento
+}
+
 export interface Scheduling {
     agendamento_id?: number,
     paciente_id: number,

@@ -20,7 +20,12 @@ export class PatientsListComponent implements OnInit {
     // Permissões do módulo - Verifica se o usuário pode alterar o registro
     canModify:boolean =   this.loginService.havePermission('Pode_Atualizar_Pacientes');
 
-    constructor(private router: Router, private patientsService: PatientsService, private messageService: MessageService, private loginService: LoginService ) { 
+    constructor(
+        private router: Router, 
+        private loginService: LoginService,
+        private patientsService: PatientsService, 
+        private messageService: MessageService
+    ) { 
         
         setTimeout(() => {
             this.patientsService.read().subscribe({

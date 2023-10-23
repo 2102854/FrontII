@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service'
-import { Scheduling, SchedulingFull } from './scheduling.model';
+import { Scheduling, SchedulingFull, data_form } from './scheduling.model';
 import { CookieService } from 'ngx-cookie-service';
 
 	@Injectable({
@@ -76,5 +76,21 @@ import { CookieService } from 'ngx-cookie-service';
 			} ) 			
 			const url = `${this.baseUrl}/update/${scheduling.agendamento_id}`
 			return this.httpCliente.put<Scheduling>(url, scheduling, { headers: headers})
-		}		
+		}
+		
+		get_data_form(): Observable<data_form[]> {  
+			let token = this.cookieService.get('_sisgertranspac-t')
+			let headers = new HttpHeaders({  
+				"x-access-token": String(token),
+				"Access-Control-Allow-Credentials": "true",
+				"Access-Control-Allow-Origin": "*",
+				"Access-Control-Allow-Methods": "GET",
+				"Access-Control-Allow-Headers" : "Origin, X-Requested-With, Content-Type, Accept",
+				"Content-Type" : "application/json",
+				"Accept" : "application/json"
+			} )	
+			const url = `${this.baseUrl}/data_form`					 
+			return this.httpCliente.get<data_form[]>(url,{ headers: headers})
+		}			
+		
 }
