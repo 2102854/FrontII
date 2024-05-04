@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { VeiculosComponent } from './veiculos/veiculos.component';
-//import { CidadesNewComponent } from './cidades_new/cidades_new.component';
-//import { CidadesUpdateComponent }  from './cidades_update/cidades_update.component';
+import { VeiculosNewComponent } from './veiculos_new/veiculos_new.component';
+import { VeiculosUpdateComponent }  from './veiculos_update/veiculos_update.component';
 
 @NgModule({
     imports: [RouterModule.forChild([
         { path: '', component: VeiculosComponent },
-        //{ path: 'create', component: CidadesNewComponent },
-        //{ path: 'update/:id', component: CidadesUpdateComponent }
+        { path: 'create', component: VeiculosNewComponent },
+        { path: 'update/:id', component: VeiculosUpdateComponent }
     ])],
     exports: [RouterModule]
 })

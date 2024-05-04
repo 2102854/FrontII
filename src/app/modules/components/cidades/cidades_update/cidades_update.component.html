@@ -17,8 +17,7 @@
 		</div>  		       
 		<div class="card">
 			<h5 class="pb-3">Dados da Cidade</h5>	
-			<form> 
-                <!-- 	
+			<form>  	
 				<div class="p-fluid p-formgrid grid">                    
 					<div class="field col-12 md:col-6">
 						<div class="p-inputgroup">
@@ -31,9 +30,18 @@
 							</span>
 						</div>
 					</div>
-                    <div class="field col-12 md:col-6">                    			
+					<div class="field col-12 md:col-4">                    			
                         <span class="p-float-label">
-                            <p-dropdown [options]="paises" [(ngModel)]="selectedPais" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Pais" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <p-dropdown 
+                                [options]="paises" 
+                                [(ngModel)]="selectedPais" 
+                                optionLabel="nome" 
+                                [filter]="true" 
+                                filterBy="nome" 
+                                [showClear]="true" 
+                                placeholder="Pais" 
+                                [ngModelOptions]="{standalone: true}"
+                            ></p-dropdown>
                             <ng-template pTemplate="selectedItem">
                                 <div class="flex align-items-center gap-2" *ngIf="selectedPais">                                    
                                     <div>{{ selectedPais.nome }}</div>
@@ -47,15 +55,23 @@
                             
                             <label for="float-label">Pais</label>
                         </span>                                        
-                    </div> 
+                    </div>  
 
-                    
-					<div class="field col-12 md:col-6">                    			
+					<div class="field col-12 md:col-4">                    			
                         <span class="p-float-label">
-                            <p-dropdown [options]="estados" [(ngModel)]="selectedEstado" optionLabel="nome" [filter]="true" filterBy="nome" [showClear]="true" placeholder="Estado" [ngModelOptions]="{standalone: true}"></p-dropdown>
+                            <p-dropdown 
+                                [options]="estados" 
+                                [(ngModel)]="selectedEstado" 
+                                optionLabel="nome" 
+                                [filter]="true" 
+                                filterBy="nome" 
+                                [showClear]="true" 
+                                placeholder="Estado" 
+                                [ngModelOptions]="{standalone: true}"
+                            ></p-dropdown>
                             <ng-template pTemplate="selectedItem">
-                                <div class="flex align-items-center gap-2" *ngIf="selectedEstadps">                                    
-                                    <div>{{ selectedEstados.nome }}</div>
+                                <div class="flex align-items-center gap-2" *ngIf="selectedEstado">                                    
+                                    <div>{{ selectedEstado.nome }}</div>
                                 </div>
                             </ng-template>                            
                             <ng-template let-pais pTemplate="item">
@@ -66,8 +82,7 @@
                             
                             <label for="float-label">Estado</label>
                         </span>                                        
-                    </div>       
-
+                    </div>  
                     
 					<div class="field col-12 md:col-3">
 						<span class="p-float-label">
@@ -88,11 +103,10 @@
                 <div class="p-fluid p-formgrid grid justify-content-end">
 					<div class="field col-12 md:col-1 ">
 						<div class="flex flex-wrap  ">
-							<button pButton pRipple label="Salvar" name="salvar" id="salvar" class="p-button-success" (click)="create()"></button>
+							<button pButton pRipple label="Salvar" name="salvar" id="salvar" class="p-button-success" (click)="update()"></button>
 						</div>
 					</div>				
-				</div>
-             -->     
+				</div>  
 			</form>			
 		</div>  		    
     </div>

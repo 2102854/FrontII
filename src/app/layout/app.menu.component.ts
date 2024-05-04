@@ -40,7 +40,13 @@ export class AppMenuComponent implements OnInit {
                         icon: 'pi pi-fw pi-calendar', 
                         routerLink: ['/app/agendamento'], 
                         visible: this.loginService.havePermission('Pode_Visualizar_Agendamentos')
-                    }
+                    },
+                    { 
+                        label: 'Relatórios', 
+                        icon: 'pi pi-fw pi-file-pdf', 
+                        routerLink: ['/app/reports'], 
+                        visible: this.loginService.havePermission('Pode_Visualizar_Agendamentos')
+                    } 
                 ]
             },
             {

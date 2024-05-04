@@ -1,0 +1,56 @@
+<div class="grid">
+    <div class="col-12 md:col-12">
+		<div class="card" style="padding-bottom: 3px; padding-top: 25px;">
+			<div class="py-0 p-fluid p-formgrid grid">
+				<div class="field col-12 md:col-6">
+					<h5 class="my-0">Cadastro de Motoristas</h5>
+					<p-toast key="tst" [showTransformOptions]="'translateY(100%)'" [showTransitionOptions]="'1000ms'" [hideTransitionOptions]="'1000ms'" [showTransformOptions]="'translateX(100%)'"></p-toast>
+					<span>Atualiza os dados de um motorista no sistema</span>
+					<p-breadcrumb class="max-w-full" id="breadcrumb" [model]="items" [home]="home" [style]="{border: 'none'}"></p-breadcrumb>
+				</div>
+				<div class="field col-12 md:col-6">
+					<div class="flex flex-wrap  justify-content-end">				
+						<p-button pRipple label="Voltar" styleClass="p-button-outlined p-button-secondary" name="voltar" id="voltar" (click)="cancel()"></p-button>
+					</div>
+				</div>		
+			</div>
+		</div>  
+		<div class="card">
+			<h5 class="pb-3">Dados do Motorista</h5>	
+			<form>	
+				<div class="p-fluid p-formgrid grid">
+					<div class="field col-12 md:col-6">
+						<div class="p-inputgroup">
+							<span class="p-inputgroup-addon">
+								<i class="bi bi-globe-americas"></i>
+							</span>
+							<span class="p-float-label">
+								<input type="text" id="nome" pInputText [(ngModel)]="motoristas.nome" name="motoristas_nome" autocomplete="off">								
+								<label for="nome">Nome do Motorista</label>
+							</span>
+						</div>
+					</div>
+					<div class="field col-12 md:col-4">
+						<span class="p-float-label">
+							<input type="text" id="numero_habilitacao" pInputText [(ngModel)]="motoristas.numero_habilitacao" name="motoristas_numero_habilitacao" autocomplete="off">
+							<label for="inputtext">Habilitação</label>
+						</span>
+					</div>
+					<div class="field col-12 md:col-4">
+						<span class="p-float-label">
+							<input type="text" id="carga_horaria" pInputText [(ngModel)]="motoristas.carga_horaria" name="motoristas_carga_horaria" autocomplete="off">
+							<label for="inputtext">Carga horária</label>
+						</span>
+					</div>
+				</div>
+				<div class="p-fluid p-formgrid grid justify-content-end">
+					<div class="field col-12 md:col-1 ">
+						<div class="flex flex-wrap  ">
+							<button pButton pRipple label="Salvar" name="salvar" id="salvar" class="p-button-success" (click)="update()"></button>
+						</div>
+					</div>				
+				</div>
+			</form>			
+		</div>
+    </div>
+</div>

@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VeiculosComponent } from './veiculos/veiculos.component';
-import { VeiculosListComponent } from './veiculos_list/veiculos-list.component';
-import { VeiculosNewComponent} from './veiculos_new/veiculos_new.component';
-import { VeiculosUpdateComponent } from './veiculos_update/veiculos_update.component';
-import { VeiculosRoutingModule } from './veiculos-routing.module';
+
+//Corrigi Aqui
+import { ReportsComponent} from './reports/reports.component';
+import { ReportsListComponent} from './reports_list/reports-list.component';
+import { ReportsRoutingModule } from './reports-routing.module';
+
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
@@ -25,21 +26,20 @@ import { InputTextModule } from "primeng/inputtext";
 import { BreadcrumbModule } from 'primeng/breadcrumb';
 import { ToastModule } from 'primeng/toast';
 
+//Corrigi Aqui
 @NgModule({
   declarations: [
-    VeiculosComponent,
-    VeiculosListComponent,
-    VeiculosNewComponent,
-    VeiculosUpdateComponent
+    ReportsComponent,
+    ReportsListComponent
   ],
   imports: [
     CommonModule,
-    VeiculosRoutingModule,
+    ReportsRoutingModule,
     TableModule,
     ButtonModule,
-    RippleModule,
-    SplitButtonModule,
-    ToggleButtonModule,
+		RippleModule,
+		SplitButtonModule,
+		ToggleButtonModule,
     ToolbarModule,
     FormsModule,
     AutoCompleteModule,
@@ -56,4 +56,4 @@ import { ToastModule } from 'primeng/toast';
     ToastModule
   ]
 })
-export class VeiculosModule { }
+export class ReportsModule { }

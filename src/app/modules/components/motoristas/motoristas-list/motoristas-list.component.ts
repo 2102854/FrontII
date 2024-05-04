@@ -1,5 +1,5 @@
 import { Component, Input , AfterViewInit, ViewChild,OnInit } from '@angular/core';
-import { Motorista } from './../motoristas.model';
+import { Motoristas } from './../motoristas.model';
 import { MotoristasService } from "./../motoristas.service";
 
 import { MessageService } from 'primeng/api';
@@ -13,7 +13,7 @@ import { MessageService } from 'primeng/api';
 
 export class MotoristasListComponent implements OnInit {
 
-    motoristas: Motorista[];
+    motoristas: Motoristas[];
     constructor(private motoristasService: MotoristasService, private messageService: MessageService ) { 
         setTimeout(() => {
             this.motoristasService.read().subscribe({

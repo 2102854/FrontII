@@ -1,0 +1,26 @@
+<div class="card">
+    <span class="block text-600 font-medium mb-3">PACIENTES</span>
+    <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+        <li class="flex align-items-center py-2 border-bottom-1 surface-border">
+            <p-button pRipple icon="pi pi-fw pi-id-card text-xl text-blue-500" 
+                styleClass="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0" 
+                name="btn_agendamentos" id="btn_agendamentos"
+                (click)="openReportPacientes()">
+            </p-button>            
+            <span class="text-900 line-height-3">Lista de pacientes cadastrados no sistema</span>
+        </li>            
+    </ul>
+
+    <span class="block text-600 font-medium mb-3">AGENDAMENTOS</span>
+    <ul class="p-0 mx-0 mt-0 mb-4 list-none">
+        <li class="flex align-items-center py-2 border-bottom-1 surface-border">            
+            <p-button pRipple icon="pi pi-fw pi-calendar text-xl text-blue-500" 
+                styleClass="w-3rem h-3rem flex align-items-center justify-content-center bg-blue-100 border-circle mr-3 flex-shrink-0" 
+                name="btn_agendamentos" id="btn_agendamentos"
+                (click)="openReportAgendamentos()">
+            </p-button>            
+            <span class="text-900 line-height-3">Agendamento de Pacientes</span>
+        </li>            
+    </ul>
+
+</div>

@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MotoristasComponent } from './motoristas/motoristas.component';
 import { MotoristasListComponent } from './motoristas-list/motoristas-list.component';
-//import { CidadesNewComponent} from './veiculos_new/veiculos_new.component';
-//import { CidadesUpdateComponent } from './veiculos_update/veiculos_update.component';
+import { MotoristasNewComponent} from './motoristas_new/motoristas_new.component';
+import { MotoristasUpdateComponent } from './motoristas_update/motoristas_update.component';
 import { MotoristasRoutingModule } from './motoristas-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -29,8 +29,8 @@ import { ToastModule } from 'primeng/toast';
   declarations: [
     MotoristasComponent,
     MotoristasListComponent,
-//    CidadesNewComponent,
-//    CidadesUpdateComponent
+    MotoristasNewComponent,
+    MotoristasUpdateComponent
   ],
   imports: [
     CommonModule,
@@ -56,4 +56,4 @@ import { ToastModule } from 'primeng/toast';
     ToastModule
   ]
 })
-export class VeiculosModule { }
+export class MotoristasModule { }

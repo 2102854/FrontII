@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LoginService } from './../auth/login.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Motorista } from './motoristas.model';
+import { Motoristas } from './motoristas.model';
 
 	@Injectable({
 		providedIn: 'root'
@@ -19,7 +19,7 @@ import { Motorista } from './motoristas.model';
 		ngOnInit(): void {		
 		}
     
-		read(): Observable<Motorista[]> {   
+		read(): Observable<Motoristas[]> {   
 			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
@@ -30,10 +30,10 @@ import { Motorista } from './motoristas.model';
 				"Content-Type" : "application/json",
 				"Accept" : "application/json"
 			})				
-			return this.httpCliente.get<Motorista[]>(this.baseUrl,{ headers: headers})
+			return this.httpCliente.get<Motoristas[]>(this.baseUrl,{ headers: headers})
 		}	
 
-		readById(id: string): Observable<Motorista> {
+		readById(id: string): Observable<Motoristas> {
 			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
@@ -45,10 +45,10 @@ import { Motorista } from './motoristas.model';
 				"Accept" : "application/json"
 			})				
 			const url = `${this.baseUrl}/${id}`
-			return this.httpCliente.get<Motorista>(url,{ headers: headers})
+			return this.httpCliente.get<Motoristas>(url,{ headers: headers})
 		}
 		
-		create(motorista: Motorista): Observable<Motorista> {
+		create(motorista: Motoristas): Observable<Motoristas> {
 			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
@@ -60,10 +60,10 @@ import { Motorista } from './motoristas.model';
 				"Accept" : "application/json"
 			})				
 			const url = `${this.baseUrl}/add`
-			return this.httpCliente.post<Motorista>(url, motorista, { headers: headers})
+			return this.httpCliente.post<Motoristas>(url, motorista, { headers: headers})
 		}
 		
-		update(motorista: Motorista): Observable<Motorista> {
+		update(motorista: Motoristas): Observable<Motoristas> {
 			let token = this.cookieService.get('_sisgertranspac-t')
 			let headers = new HttpHeaders({  
 				"x-access-token": String(token),
@@ -75,6 +75,6 @@ import { Motorista } from './motoristas.model';
 				"Accept" : "application/json"
 			})				
 			const url = `${this.baseUrl}/update/${motorista.motorista_id}`
-			return this.httpCliente.put<Motorista>(url, motorista, { headers: headers})
+			return this.httpCliente.put<Motoristas>(url, motorista, { headers: headers})
 		}		
 }

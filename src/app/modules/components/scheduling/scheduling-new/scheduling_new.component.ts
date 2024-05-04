@@ -19,7 +19,7 @@ import { Hospital } from "../../hospitals/hospitals.model";
 import { HospitalsService } from "../../hospitals/hospitals.service";
 import { Veiculos } from "../../veiculos/veiculos.model";
 import { VeiculosService } from "../../veiculos/veiculos.service";
-import { Motorista } from "../../motoristas/motoristas.model";
+import { Motoristas } from "../../motoristas/motoristas.model";
 import { MotoristasService} from "../../motoristas/motoristas.service";
 import { FormControl, FormGroup } from '@angular/forms';
 import { PrimeNGConfig } from 'primeng/api';
@@ -48,8 +48,8 @@ export class SchedulingNewComponent implements OnInit {
     tipo_Remocao: Tipo_Remocao[] = [];
     selectedTipoRemocao: Tipo_Remocao | undefined;
 
-    motorista: Motorista[] = []; 
-    selectedMotorista: Motorista | undefined;
+    motorista: Motoristas[] = []; 
+    selectedMotorista: Motoristas | undefined;
     
     veiculos: Veiculos[] = []; 
     selectedVeiculos: Veiculos | undefined;

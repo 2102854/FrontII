@@ -1,4 +1,4 @@
-export interface Motorista {
+export interface Motoristas {
     motorista_id?: number,
     nome: string,
     numero_habilitacao: string, 
