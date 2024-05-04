@@ -47,6 +47,7 @@ export class PaisesUpdateComponent implements OnInit {
         setTimeout(() => {
             const id = this.route.snapshot.paramMap.get('id')
             this.paisService.readById(id).subscribe(pais => {
+                //console.log(pais)
                 this.pais = pais 
             })          
         }, 200)         

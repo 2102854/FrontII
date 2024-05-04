@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HospitalsComponent } from './hospitals/hospitals.component';
 import { HospitalsListComponent } from './hospitals-list/hospitals-list.component';
+import { HospitalsNewComponent} from './hospitals_new/hospitals_new.component';
+import { HospitalsUpdateComponent } from './hospitals_update/hospitals_update.component';
 import { HospitalsRoutingModule } from './hospitals-routing.module';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
@@ -27,8 +29,8 @@ import { ToastModule } from 'primeng/toast';
   declarations: [
     HospitalsComponent,
     HospitalsListComponent,
-   // PaisesNewComponent,
-   // PaisesUpdateComponent
+    HospitalsNewComponent,
+    HospitalsUpdateComponent
   ],
   imports: [
     CommonModule,

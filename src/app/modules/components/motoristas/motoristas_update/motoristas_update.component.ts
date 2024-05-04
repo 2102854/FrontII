@@ -7,7 +7,6 @@ import { LoginService } from '../../auth/login.service';
 import { MessageService } from 'primeng/api';
 import { MenuItem } from 'primeng/api';
 
-
 @Component({
     selector: 'app-motoristas-create',
     templateUrl: './motoristas_update.component.html',
